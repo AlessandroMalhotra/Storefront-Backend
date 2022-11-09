@@ -1,4 +1,4 @@
-import Client from '../Database/database';
+import client from '../Database/database';
 
 type User = {
   id: Number;
@@ -10,10 +10,10 @@ type User = {
 class UserAccounts {
   async index(): Promise<User[]> {
     try {
-      const connection = await Client.connect();
+      const connection = await client.connect();
       const sql = 'SELECT * FROM users';
       const user = await connection.query(sql);
-      console.log(user);
+      //console.log(user);
       connection.release();
       return user.rows;
     } catch (error) {
@@ -23,10 +23,10 @@ class UserAccounts {
 
   async show(id: string): Promise<User[]> {
     try {
-      const connection = await Client.connect();
+      const connection = await client.connect();
       const sql = 'SELECT * FROM users WHERE id = ($1)';
       const user = await connection.query(sql, [id]);
-      console.log(user);
+      //console.log(user);
       connection.release();
       return user.rows;
     } catch (error) {
@@ -36,10 +36,10 @@ class UserAccounts {
 
   async create(u: User): Promise<User[]> {
     try {
-      const connection = await Client.connect();
+      const connection = await client.connect();
       const sql = 'INSERT INTO user (firstName, lastName, password) VALUES ($1, $2, $3)';
       const user = await connection.query(sql,[u.firstName, u.lastName, u.password]);
-      console.log(user);
+      //console.log(user);
       connection.release();
       return user.rows;
     } catch (error) {
