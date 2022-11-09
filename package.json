@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "build": "npx tsc"
+    "build": "npx tsc",
+    "jasmine": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/AlessandroMalhotra/Storefront-Backend#readme",
   "devDependencies": {
+    "@types/jasmine": "^4.3.0",
     "@types/node": "^18.11.9",
     "@types/pg": "^8.6.5",
     "@types/typescript": "^2.0.0",
@@ -35,6 +37,8 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "typescript": "^4.8.4"
   }
 }
