@@ -49,3 +49,4 @@ class ProductStore {
   }
 }
 
+export { Product, ProductStore };
