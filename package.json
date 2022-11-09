@@ -26,7 +26,6 @@
     "eslint-plugin-n": "^15.5.0",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^2.7.1",
-    "psql": "^0.0.1",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
