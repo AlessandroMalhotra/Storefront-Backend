@@ -12,8 +12,9 @@ class UserAccounts {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM users';
+
       const user = await connection.query(sql);
-      //console.log(user);
+
       connection.release();
       return user.rows;
     } catch (error) {
@@ -21,34 +22,38 @@ class UserAccounts {
     }
   }
 
-  async show(id: number): Promise<User[]> {
+  async show(id: number): Promise<User> {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM users WHERE id = ($1)';
-      const user = await connection.query(sql, [id]);
-      //console.log(user);
+
+      const result = await connection.query(sql, [id]);
+      const user = result.rows[0];
+
       connection.release();
-      return user.rows;
+      return user;
     } catch (error) {
       throw new Error(`Cannot get specifc user ${error}`);
     }
   }
 
-  async create(u: User): Promise<User[]> {
+  async create(u: User): Promise<User> {
     try {
       const connection = await client.connect();
       const sql =
-        'INSERT INTO user (firstName, lastName, password) VALUES ($1, $2, $3)';
-      const user = await connection.query(sql, [
+        'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
+
+      const result = await connection.query(sql, [
         u.firstName,
         u.lastName,
         u.password,
       ]);
-      //console.log(user);
+      const user = result.rows[0];
+
       connection.release();
-      return user.rows;
+      return user;
     } catch (error) {
-      throw new Error(`Cannot insert product into database ${error}`);
+      throw new Error(`Cannot insert user into database ${error}`);
     }
   }
 }

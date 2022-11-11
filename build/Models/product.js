@@ -11,7 +11,7 @@ class ProductStore {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM product';
             const product = await connection.query(sql);
-            console.log(product);
+            //console.log(product);
             connection.release();
             return product.rows;
         }
@@ -24,7 +24,7 @@ class ProductStore {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM product WHERE id = ($1)';
             const product = await connection.query(sql, [id]);
-            console.log(product);
+            //console.log(product);
             connection.release();
             return product.rows;
         }

@@ -11,7 +11,6 @@ class UserAccounts {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM users';
             const user = await connection.query(sql);
-            //console.log(user);
             connection.release();
             return user.rows;
         }
@@ -23,10 +22,10 @@ class UserAccounts {
         try {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM users WHERE id = ($1)';
-            const user = await connection.query(sql, [id]);
-            //console.log(user);
+            const result = await connection.query(sql, [id]);
+            const user = result.rows[0];
             connection.release();
-            return user.rows;
+            return user;
         }
         catch (error) {
             throw new Error(`Cannot get specifc user ${error}`);
@@ -35,18 +34,18 @@ class UserAccounts {
     async create(u) {
         try {
             const connection = await database_1.default.connect();
-            const sql = 'INSERT INTO user (firstName, lastName, password) VALUES ($1, $2, $3)';
-            const user = await connection.query(sql, [
+            const sql = 'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
+            const result = await connection.query(sql, [
                 u.firstName,
                 u.lastName,
                 u.password,
             ]);
-            //console.log(user);
+            const user = result.rows[0];
             connection.release();
-            return user.rows;
+            return user;
         }
         catch (error) {
-            throw new Error(`Cannot insert product into database ${error}`);
+            throw new Error(`Cannot insert user into database ${error}`);
         }
     }
 }

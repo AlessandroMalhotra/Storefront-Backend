@@ -12,8 +12,10 @@ class ProductStore {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM product';
+
       const product = await connection.query(sql);
-      console.log(product);
+      //console.log(product);
+
       connection.release();
       return product.rows;
     } catch (error) {
@@ -25,8 +27,10 @@ class ProductStore {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM product WHERE id = ($1)';
+
       const product = await connection.query(sql, [id]);
-      console.log(product);
+      //console.log(product);
+
       connection.release();
       return product.rows;
     } catch (error) {
@@ -39,11 +43,13 @@ class ProductStore {
       const connection = await client.connect();
       const sql =
         'INSERT INTO product (name, price, category) VALUES ($1, $2, $3)';
+
       const product = await connection.query(sql, [
         p.name,
         p.price,
         p.category,
       ]);
+
       console.log(product);
       connection.release();
       return product.rows;

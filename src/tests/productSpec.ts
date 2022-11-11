@@ -2,16 +2,16 @@ import { ProductStore } from '../Models/product';
 
 const product = new ProductStore();
 
-describe('Test user model functions', () => {
-  it('Checks id index method correctly defined', async () => {
+describe('Test product model functions', () => {
+  it('Checks product index method correctly defined', async () => {
     expect(product.index).toBeDefined();
   });
 
-  it('Checks create function correctly been defined', () => {
+  it('Checks product create function correctly been defined', () => {
     expect(product.create).toBeDefined();
   });
 
-  it('Checks show function correctly been defined', () => {
+  it('Checks product show function correctly been defined', () => {
     expect(product.show).toBeDefined();
   });
 
