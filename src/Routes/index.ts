@@ -1,7 +1,8 @@
 import express from 'express';
-import user from './API/userAPI';
+import users from './API/userAPI';
 
-const router = express.Router()
+const router = express.Router();
 
+router.use('/users', users);
 
 export default router;

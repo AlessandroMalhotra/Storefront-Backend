@@ -23,36 +23,36 @@ class ProductStore {
     }
   }
 
-  async show(id: string): Promise<Product[]> {
+  async show(id: number): Promise<Product> {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM product WHERE id = ($1)';
 
-      const product = await connection.query(sql, [id]);
-      //console.log(product);
+      const result = await connection.query(sql, [id]);
+      const product = result.rows[0];
 
       connection.release();
-      return product.rows;
+      return product;
     } catch (error) {
       throw new Error(`Cannot get specific product ${error}`);
     }
   }
 
-  async create(p: Product): Promise<Product[]> {
+  async create(p: Product): Promise<Product> {
     try {
       const connection = await client.connect();
       const sql =
-        'INSERT INTO product (name, price, category) VALUES ($1, $2, $3)';
+        'INSERT INTO product (name, price, category) VALUES ($1, $2, $3) RETURNING *';
 
-      const product = await connection.query(sql, [
+      const result = await connection.query(sql, [
         p.name,
         p.price,
         p.category,
       ]);
-
-      console.log(product);
+      const product = result.rows[0];
+      
       connection.release();
-      return product.rows;
+      return product;
     } catch (error) {
       throw new Error(`Cannot insert product into database ${error}`);
     }

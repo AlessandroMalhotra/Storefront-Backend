@@ -23,10 +23,10 @@ class ProductStore {
         try {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM product WHERE id = ($1)';
-            const product = await connection.query(sql, [id]);
-            //console.log(product);
+            const result = await connection.query(sql, [id]);
+            const product = result.rows[0];
             connection.release();
-            return product.rows;
+            return product;
         }
         catch (error) {
             throw new Error(`Cannot get specific product ${error}`);
@@ -35,15 +35,15 @@ class ProductStore {
     async create(p) {
         try {
             const connection = await database_1.default.connect();
-            const sql = 'INSERT INTO product (name, price, category) VALUES ($1, $2, $3)';
-            const product = await connection.query(sql, [
+            const sql = 'INSERT INTO product (name, price, category) VALUES ($1, $2, $3) RETURNING *';
+            const result = await connection.query(sql, [
                 p.name,
                 p.price,
                 p.category,
             ]);
-            console.log(product);
+            const product = result.rows[0];
             connection.release();
-            return product.rows;
+            return product;
         }
         catch (error) {
             throw new Error(`Cannot insert product into database ${error}`);
