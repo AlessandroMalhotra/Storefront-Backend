@@ -1,11 +1,11 @@
 import client from '../Database/database';
 
 type User = {
-  id: Number;
+  id: number;
   firstName: string;
   lastName: string;
   password: string;
-}
+};
 
 class UserAccounts {
   async index(): Promise<User[]> {
@@ -17,11 +17,11 @@ class UserAccounts {
       connection.release();
       return user.rows;
     } catch (error) {
-      throw new Error(`Cannot get weapons ${error}`);
+      throw new Error(`Cannot show users ${error}`);
     }
   }
 
-  async show(id: string): Promise<User[]> {
+  async show(id: number): Promise<User[]> {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM users WHERE id = ($1)';
@@ -30,15 +30,20 @@ class UserAccounts {
       connection.release();
       return user.rows;
     } catch (error) {
-      throw new Error(`Cannot get weapons ${error}`);
+      throw new Error(`Cannot get specifc user ${error}`);
     }
   }
 
   async create(u: User): Promise<User[]> {
     try {
       const connection = await client.connect();
-      const sql = 'INSERT INTO user (firstName, lastName, password) VALUES ($1, $2, $3)';
-      const user = await connection.query(sql,[u.firstName, u.lastName, u.password]);
+      const sql =
+        'INSERT INTO user (firstName, lastName, password) VALUES ($1, $2, $3)';
+      const user = await connection.query(sql, [
+        u.firstName,
+        u.lastName,
+        u.password,
+      ]);
       //console.log(user);
       connection.release();
       return user.rows;
@@ -48,4 +53,4 @@ class UserAccounts {
   }
 }
 
-export {User, UserAccounts};
+export { User, UserAccounts };
