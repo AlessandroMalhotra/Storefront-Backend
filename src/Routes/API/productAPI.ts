@@ -1,27 +1,9 @@
 import express from 'express';
-import { ProductStore } from '../../Models/product';
-
+import { index, show } from '../../Handlers/productHandler';
 const products = express.Router();
-const productStore = new ProductStore();
 
-products.get('/', async (req: express.Request, res: express.Response): Promise<void> => {
-  try {
-    const product = await productStore.index();
-    res.send(product);
-  } catch (error) {
-    res.send(`Cannot get users due to ${error}.`);
-  }
-});
+products.get('/', index);
 
-products.get('/:id', async (req: express.Request, res: express.Response): Promise<void> => {
-  const productId = Number(req.params.id);
-  console.log(productId);
+products.get('/:id', show);
 
-  try {
-    const product = await productStore.show(productId);
-
-    res.send(product);
-  } catch (error) {
-    res.send(`Cannot get user by id ${productId}, ${error}.`);
-  }
-});
+export default products;
