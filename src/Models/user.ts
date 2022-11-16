@@ -40,14 +40,9 @@ class UserAccounts {
   async create(u: User): Promise<User> {
     try {
       const connection = await client.connect();
-      const sql =
-        'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
+      const sql = 'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
 
-      const result = await connection.query(sql, [
-        u.firstName,
-        u.lastName,
-        u.password,
-      ]);
+      const result = await connection.query(sql, [u.firstName, u.lastName, u.password]);
       const user = result.rows[0];
 
       connection.release();
