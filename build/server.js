@@ -7,10 +7,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
 const index_1 = __importDefault(require("./Routes/index"));
-const PORT = Number(process.env.PORT ?? 3000);
+const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
 const app = (0, express_1.default)();
 app.use('/', index_1.default);
+app.get('/', async (req, res) => {
+    res.send('Welcome to storefront');
+});
 app.listen(PORT, HOST, function () {
-    console.log(`Server listening on specified ${PORT} and ${HOST}`);
+    console.log(`Server listening on specified port ${PORT} and host ${HOST}`);
 });

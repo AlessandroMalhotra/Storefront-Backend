@@ -36,11 +36,7 @@ class ProductStore {
         try {
             const connection = await database_1.default.connect();
             const sql = 'INSERT INTO product (name, price, category) VALUES ($1, $2, $3) RETURNING *';
-            const result = await connection.query(sql, [
-                p.name,
-                p.price,
-                p.category,
-            ]);
+            const result = await connection.query(sql, [p.name, p.price, p.category]);
             const product = result.rows[0];
             connection.release();
             return product;

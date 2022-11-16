@@ -25,7 +25,7 @@ describe('Test product model functions', () => {
     const products = await product.index();
     expect(products).toEqual([]);
   });
-  
+
   it('Insert a product entry successfully ', async () => {
     const newP = await product.create(newProduct);
     expect(newP).toEqual({
@@ -35,8 +35,8 @@ describe('Test product model functions', () => {
       category: 'Trainers',
     });
   });
-  
-  it('Should return a list of users', async () => {
+
+  it('Should return a list of products', async () => {
     const newP = await product.index();
     expect(newP).toEqual([newProduct]);
   });
@@ -44,10 +44,10 @@ describe('Test product model functions', () => {
   it('Should return product by id', async () => {
     const newP = await product.show(1);
     expect(newP).toEqual({
-     id: 1,
-     name: 'Nike Air Force 1',
-     price: 135,
-     category: 'Trainers',
-    })
+      id: 1,
+      name: 'Nike Air Force 1',
+      price: 135,
+      category: 'Trainers',
+    });
   });
 });

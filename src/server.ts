@@ -10,9 +10,12 @@ const app = express();
 
 app.use('/', router);
 
-app.get('/',async (req: express.Request, res: express.Response): Promise<void> => {
-  res.send('Welcome to storefront');
-})
+app.get(
+  '/',
+  async (req: express.Request, res: express.Response): Promise<void> => {
+    res.send('Welcome to storefront');
+  }
+);
 
 app.listen(PORT, HOST, function () {
   console.log(`Server listening on specified port ${PORT} and host ${HOST}`);

@@ -1,9 +1,12 @@
 import express from 'express';
-import { ProductStore } from '../Models/product';
+import { ProductStore, Product } from '../Models/product';
 
 const productStore = new ProductStore();
 
-const index = async (req: express.Request, res: express.Response): Promise<void> => {
+const index = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
   try {
     const product = await productStore.index();
     res.send(product);
@@ -12,7 +15,10 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
   }
 };
 
-const show = async (req: express.Request, res: express.Response): Promise<void> => {
+const show = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
   const productId = Number(req.params.id);
   console.log(productId);
 
@@ -25,4 +31,20 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
   }
 };
 
-export { index, show };
+const create = async (req: express.Request, res: express.Response): Promise<void> => {
+  const newProduct: Product = {
+    name: req.params.name,
+    price: Number(req.params.price),
+    category: req.params.category
+  }
+
+  try {
+    const product = await productStore.create(newProduct);
+
+    res.send(product);
+  } catch (error) {
+    res.send(`Cannot add new product ${error}`);
+  }
+}
+
+export { index, show, create };
