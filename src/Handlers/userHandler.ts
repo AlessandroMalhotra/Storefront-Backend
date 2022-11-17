@@ -37,7 +37,13 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   }
   try {
     const newUser = await userAccount.create(user);
-    let token = jwt.sign({user:newUser}, SECRET);
+    let token: string;
+
+    if(newUser.username === 'admin'){
+      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'admin'}, SECRET);
+    } else {
+      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'user'}, SECRET);
+    }
     
     res.json(token);
   } catch (error) {
@@ -45,4 +51,4 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   }
 };
 
-export { index, show };
+export { index, show, create };
