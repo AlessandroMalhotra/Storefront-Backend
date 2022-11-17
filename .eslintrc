@@ -13,7 +13,6 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "rules": {
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
-    "no-unexpected-multiline": "error"
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
   }
 }

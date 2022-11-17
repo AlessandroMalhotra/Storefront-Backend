@@ -1,9 +1,18 @@
 import client from '../Database/database';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const {
+  SALT_ROUNDS,
+  BCRYPT_PASSWORD
+} = process.env
 
 type User = {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
+  username: string;
   password: string;
 };
 
@@ -41,8 +50,9 @@ class UserAccounts {
     try {
       const connection = await client.connect();
       const sql = 'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
+      const hash = bcrypt.hashSync(u.password + BCRYPT_PASSWORD, Number(SALT_ROUNDS));
 
-      const result = await connection.query(sql, [u.firstName, u.lastName, u.password]);
+      const result = await connection.query(sql, [u.firstName, u.lastName, hash, u.username]);
       const user = result.rows[0];
 
       connection.release();
