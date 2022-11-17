@@ -7,8 +7,8 @@ const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
 
 type User = {
   id?: number;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   username: string;
   password: string;
 };
