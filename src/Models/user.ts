@@ -3,10 +3,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const {
-  SALT_ROUNDS,
-  BCRYPT_PASSWORD
-} = process.env
+const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
 
 type User = {
   id?: number;
