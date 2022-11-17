@@ -25,3 +25,6 @@ const show = async (req, res) => {
     }
 };
 exports.show = show;
+const create = async (req, res) => {
+    //
+};

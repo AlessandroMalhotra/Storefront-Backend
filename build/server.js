@@ -6,10 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const index_1 = __importDefault(require("./Routes/index"));
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type, Authorization',
+    optionsSuccessStatus: 200
+};
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)(corsOptions));
 app.use('/', index_1.default);
 app.get('/', async (req, res) => {
     res.send('Welcome to storefront');

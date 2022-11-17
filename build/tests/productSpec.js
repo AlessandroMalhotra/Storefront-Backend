@@ -31,7 +31,7 @@ describe('Test product model functions', () => {
             category: 'Trainers',
         });
     });
-    it('Should return a list of users', async () => {
+    it('Should return a list of products', async () => {
         const newP = await product.index();
         expect(newP).toEqual([newProduct]);
     });

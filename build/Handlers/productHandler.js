@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.show = exports.index = void 0;
+exports.create = exports.show = exports.index = void 0;
 const product_1 = require("../Models/product");
 const productStore = new product_1.ProductStore();
 const index = async (req, res) => {
@@ -25,3 +25,18 @@ const show = async (req, res) => {
     }
 };
 exports.show = show;
+const create = async (req, res) => {
+    const newProduct = {
+        name: req.params.name,
+        price: Number(req.params.price),
+        category: req.params.category,
+    };
+    try {
+        const product = await productStore.create(newProduct);
+        res.send(product);
+    }
+    catch (error) {
+        res.send(`Cannot add new product ${error}`);
+    }
+};
+exports.create = create;

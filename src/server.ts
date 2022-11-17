@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import router from './Routes/index';
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -16,6 +17,7 @@ const corsOptions = {
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use('/', router);
 

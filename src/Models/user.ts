@@ -46,7 +46,7 @@ class UserAccounts {
   async create(u: User): Promise<User> {
     try {
       const connection = await client.connect();
-      const sql = 'INSERT INTO users ("firstName", "lastName", password) VALUES ($1, $2, $3) RETURNING *';
+      const sql = 'INSERT INTO users ("firstName", "lastName", password, username) VALUES ($1, $2, $3, $4) RETURNING *';
       const hash = bcrypt.hashSync(u.password + BCRYPT_PASSWORD, Number(SALT_ROUNDS));
 
       const result = await connection.query(sql, [u.firstName, u.lastName, hash, u.username]);

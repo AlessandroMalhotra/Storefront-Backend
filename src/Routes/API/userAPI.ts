@@ -5,6 +5,6 @@ const users = express.Router();
 
 users.get('/', index);
 
-users.get('/:id', show);
+users.get('/id', show);
 
 export default users;
