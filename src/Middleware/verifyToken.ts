@@ -16,3 +16,5 @@ const verifyAuthToken = async(req: express.Request, res: express.Response, next:
         res.status(401);
     }
 }
+
+export default verifyAuthToken;
