@@ -7,13 +7,13 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 - Index Done
 - Show Done
-- Create [token required] - TODO
+- Create [token required] - Done
 - [OPTIONAL] Top 5 most popular products - TODO
 - [OPTIONAL] Products by category (args: product category) -TODO
 
 #### Users
-- Index [token required] Done needs token middleware
-- Show [token required] Done needs token middleware
+- Index [token required] Done 
+- Show [token required] Done
 - Create user N[token required] Done needs token middleware
 - Sign in - TODO
 #### Orders

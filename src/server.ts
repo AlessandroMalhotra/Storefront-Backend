@@ -11,7 +11,7 @@ const HOST = process.env.HOST as string;
 const corsOptions = { 
   origin: '*',
   methods: 'GET,POST',
-  allowedHeaders: 'Content-Type, Authorization',
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 }
 
