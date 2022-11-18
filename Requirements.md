@@ -12,7 +12,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - [OPTIONAL] Products by category (args: product category) -TODO
 
 #### Users
-- Index [token required] Done needs token middleware 
+- Index [token required] Done needs token middleware
 - Show [token required] Done needs token middleware
 - Create user N[token required] Done needs token middleware
 - Sign in - TODO
