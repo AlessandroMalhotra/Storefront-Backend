@@ -56,7 +56,21 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
     username: req.body.username,
     password: req.body.password
   }
-  
+
+  try {
+    let token;
+    const authUser = await userAccount.authenticate(user);
+    
+    if(authUser.username === 'admin'){
+      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'admin'}, SECRET);
+    } else {
+      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'user'}, SECRET);
+    }
+    res.json(token);
+  } catch (error) {
+    // throw error here with status code need to look into error handling 
+  }
+
 }
 
-export { index, show, create };
+export { index, show, create, signIn };

@@ -1,6 +1,7 @@
 import client from '../Database/database';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import { userInfo } from 'os';
 dotenv.config();
 
 const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
@@ -56,6 +57,27 @@ class UserAccounts {
       return user;
     } catch (error) {
       throw new Error(`Cannot insert user into database ${error}`);
+    }
+  }
+  
+  async authenticate(u: User): Promise<User | null> {
+    try {
+      const connection = await client.connect();
+      const sql = 'SELECT password FROM users WHERE username = {username}';
+      
+      const result = await connection.query(sql, [u.username]);
+
+      if(result.rows.length) {
+        const user = result.rows[0]
+
+        if(bcrypt.compareSync(u.password+BCRYPT_PASSWORD, user.password)) {
+          connection.release();
+          return user;
+        }
+      }
+      return null;
+    } catch (error) {
+      throw new Error('Cannot sign in with user name and password.');
     }
   }
 }
