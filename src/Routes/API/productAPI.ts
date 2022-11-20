@@ -6,8 +6,8 @@ const products = express.Router();
 
 products.get('/', index);
 
-products.get('/:id', show);
+products.get('/id', show);
 
-products.post('/:name/:price/:category', verifyAuthToken, create);
+products.post('/newproduct', verifyAuthToken, create);
 
 export default products;

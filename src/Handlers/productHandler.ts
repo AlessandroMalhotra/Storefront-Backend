@@ -13,7 +13,7 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
 };
 
 const show = async (req: express.Request, res: express.Response): Promise<void> => {
-  const productId = Number(req.params.id);
+  const productId = Number(req.body.id);
   console.log(productId);
 
   try {
@@ -27,9 +27,9 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
 
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
   const newProduct: Product = {
-    name: req.params.name,
-    price: Number(req.params.price),
-    category: req.params.category,
+    name: req.body.name,
+    price: Number(req.body.price),
+    category: req.body.category,
   };
 
   try {
