@@ -8,6 +8,6 @@ users.get('/', verifyAuthToken, index);
 
 users.get('/id', verifyAuthToken, show);
 
-users.post('/createuser', create)
+users.post('/createuser', verifyAuthToken, create)
 
 export default users;

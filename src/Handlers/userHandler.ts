@@ -51,4 +51,12 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   }
 };
 
+const signIn = async (req:express.Request, res: express.Response): Promise<void> => {
+  const user: User = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  
+}
+
 export { index, show, create };
