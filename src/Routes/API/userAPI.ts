@@ -10,6 +10,6 @@ users.get('/id', verifyAuthToken, show);
 
 users.post('/createuser', verifyAuthToken, create)
 
-users.post('/signin',signIn)
+users.post('/signin', signIn)
 
 export default users;
