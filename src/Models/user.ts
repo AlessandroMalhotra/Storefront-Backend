@@ -63,21 +63,22 @@ class UserAccounts {
   async authenticate(u: User): Promise<User | null> {
     try {
       const connection = await client.connect();
-      const sql = 'SELECT password FROM users WHERE username = {username}';
+      const sql = 'SELECT password FROM users WHERE username = ($1)';
       
       const result = await connection.query(sql, [u.username]);
 
       if(result.rows.length) {
         const user = result.rows[0]
+        console.log(user);
 
-        if(bcrypt.compareSync(u.password+BCRYPT_PASSWORD, user.password)) {
+        if(bcrypt.compareSync(u.password + BCRYPT_PASSWORD, user.password)) {
           connection.release();
           return user;
         }
       }
       return null;
     } catch (error) {
-      throw new Error('Cannot sign in with user name and password.');
+      throw new Error('Cannot sign in with username and password.');
     }
   }
 }

@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import { UserAccounts, User } from '../Models/user';
 
-const SECRET = process.env.SECRET as string;
+const SECRET = process.env.SECRET as Secret;
 const userAccount = new UserAccounts();
 
 const index = async (req: express.Request, res: express.Response): Promise<void> => {
@@ -56,22 +56,24 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
     username: req.body.username,
     password: req.body.password
   }
+  console.log(user);
 
   try {
     let token;
-    const authUser = await userAccount.authenticate(user);
+    const password = await userAccount.authenticate(user);
+    console.log(password);
     
-    if(authUser) {
+    if(password) {
       
-      if(authUser.username === 'admin'){
-        token = jwt.sign({username: authUser.username, password: authUser.password, role: 'admin'}, SECRET);
+      if(user.username === 'admin'){
+        token = jwt.sign({username: user.username, password: password, role: 'admin'}, SECRET);
       } else {
-        token = jwt.sign({username: authUser.username, password: authUser.password, role: 'user'}, SECRET);
+        token = jwt.sign({username: user.username, password: password, role: 'user'}, SECRET);
       }
     }
     res.json(token);
   } catch (error) {
-    res.send(`Can't aign in due to ${error}.`);
+    res.send(`Can't sign in due to ${error}.`);
   }
 
 }

@@ -1,15 +1,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express, { NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 
-const SECRET = process.env.SECRET as string;
+const SECRET = process.env.SECRET as Secret;
+console.log(SECRET);
 
 const verifyAuthToken = (req: express.Request, res: express.Response, next: NextFunction): void => {
     try {
         const authorizationHeader = req.headers.authorization as string;
+        console.log(authorizationHeader);
         const token = authorizationHeader.split(' ')[1] as string;
-        console.log(token);
         const decoded = jwt.verify(token, SECRET);
         console.log(decoded);
 
