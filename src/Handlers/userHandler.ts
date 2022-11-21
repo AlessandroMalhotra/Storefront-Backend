@@ -62,22 +62,16 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
     const authUser = await userAccount.authenticate(user);
     
     if(authUser) {
-      switch (authUser.username) {
-        case 'admin':
-          token = jwt.sign({username:authUser.username, password:authUser.password, role: 'admin'}, SECRET);
-          break;
-        case ''
+      
+      if(authUser.username === 'admin'){
+        token = jwt.sign({username: authUser.username, password: authUser.password, role: 'admin'}, SECRET);
+      } else {
+        token = jwt.sign({username: authUser.username, password: authUser.password, role: 'user'}, SECRET);
       }
-    }
-    
-    if(authUser.username === 'admin'){
-      token = jwt.sign({username:authUser.username, password:newUser.password, role: 'admin'}, SECRET);
-    } else {
-      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'user'}, SECRET);
     }
     res.json(token);
   } catch (error) {
-    // throw error here with status code need to look into error handling 
+    res.send(`Can't aign in due to ${error}.`);
   }
 
 }
