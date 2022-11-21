@@ -61,7 +61,6 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
   try {
     let token;
     const userPassword = await userAccount.authenticate(user);
-    console.log(userPassword);
     
     if(userPassword) {
       

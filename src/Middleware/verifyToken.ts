@@ -10,7 +10,6 @@ const verifyAuthToken = (req: express.Request, res: express.Response, next: Next
         const authorizationHeader = req.headers.authorization as string;
         const token = authorizationHeader.split(' ')[1] as string;
         const decoded = jwt.verify(token, SECRET);
-        console.log(decoded);
 
         next();
     } catch (error) {
