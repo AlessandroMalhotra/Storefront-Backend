@@ -60,15 +60,15 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
 
   try {
     let token;
-    const password = await userAccount.authenticate(user);
-    console.log(password);
+    const userPassword = await userAccount.authenticate(user);
+    console.log(userPassword);
     
-    if(password) {
+    if(userPassword) {
       
       if(user.username === 'admin'){
-        token = jwt.sign({username: user.username, password: password, role: 'admin'}, SECRET);
+        token = jwt.sign({username: user.username, password: userPassword.password, role: 'admin'}, SECRET);
       } else {
-        token = jwt.sign({username: user.username, password: password, role: 'user'}, SECRET);
+        token = jwt.sign({username: user.username, password: userPassword.password, role: 'user'}, SECRET);
       }
     }
     res.json(token);

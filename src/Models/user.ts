@@ -69,7 +69,6 @@ class UserAccounts {
 
       if(result.rows.length) {
         const user = result.rows[0]
-        console.log(user);
 
         if(bcrypt.compareSync(u.password + BCRYPT_PASSWORD, user.password)) {
           connection.release();
