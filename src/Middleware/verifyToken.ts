@@ -11,10 +11,11 @@ const verifyAuthToken = (req: express.Request, res: express.Response, next: Next
         const token = authorizationHeader.split(' ')[1] as string;
         console.log(token);
         const decoded = jwt.verify(token, SECRET);
+        console.log(decoded);
 
         next();
     } catch (error) {
-        res.status(401);
+        res.send(`${error}`);
     }
 }
 

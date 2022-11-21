@@ -14,8 +14,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Users
 - Index [token required] Done 
 - Show [token required] Done
-- Create user N[token required] Done needs token middleware
-- Sign in - TODO
+- Create user N[token required] Done
+- Sign in - Done
 #### Orders
 - Current Order by user (args: user id)[token required] - TODO
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO
