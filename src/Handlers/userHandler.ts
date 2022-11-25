@@ -40,9 +40,9 @@ const create = async (req: express.Request, res: express.Response): Promise<void
     let token: string;
 
     if(newUser.username === 'admin'){
-      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'admin'}, SECRET);
+      token = jwt.sign({username:newUser.username, password:newUser.password, admin: true}, SECRET);
     } else {
-      token = jwt.sign({username:newUser.username, password:newUser.password, role: 'user'}, SECRET);
+      token = jwt.sign({username:newUser.username, password:newUser.password, admin: false}, SECRET);
     }
     
     res.json(token);
@@ -65,9 +65,9 @@ const signIn = async (req:express.Request, res: express.Response): Promise<void>
     if(userPassword) {
       
       if(user.username === 'admin'){
-        token = jwt.sign({username: user.username, password: userPassword.password, role: 'admin'}, SECRET);
+        token = jwt.sign({username: user.username, password: userPassword.password, admin: true}, SECRET);
       } else {
-        token = jwt.sign({username: user.username, password: userPassword.password, role: 'user'}, SECRET);
+        token = jwt.sign({username: user.username, password: userPassword.password, admin: false}, SECRET);
       }
     }
     res.json(token);

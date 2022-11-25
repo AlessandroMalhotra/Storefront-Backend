@@ -59,6 +59,21 @@ class UserAccounts {
       throw new Error(`Cannot insert user into database ${error}`);
     }
   }
+
+  async addProduct(quantity: Number, orderId: Number, productId: Number): Promise<void> {
+    // add product to order
+    try {
+      const connection = await client.connect();
+      const sql = 'INSERT INTO order_product(quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
+      const result = await connection.query(sql, [quantity, orderId, productId]);
+      const orderProduct = result.rows[0];
+
+      connection.release();
+      return orderProduct;
+    } catch (error) {
+      throw new Error(`Can't add ${productId} to order ${orderId} due to: ${error}`);
+    }
+  }
   
   async authenticate(u: User): Promise<User | null> {
     try {

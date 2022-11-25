@@ -7,7 +7,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 - Index Done
 - Show Done
-- Create [token required] - Done
+- Create [token required] - Done - Add products to order model done need to do endpoint and middleware
 - [OPTIONAL] Top 5 most popular products - TODO
 - [OPTIONAL] Products by category (args: product category) -TODO
 
@@ -15,9 +15,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index [token required] Done 
 - Show [token required] Done
 - Create user N[token required] Done
-- Sign in - Done
+- Sign in/Sign up - Done
 #### Orders
-- Current Order by user (args: user id)[token required] - TODO
+- Current Order by user (args: user id)[token required] - TODO - 
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO
 
 ## Data Shapes
@@ -33,7 +33,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - lastName
 - password
 
-#### Orders - TODO
+#### Orders - Done
 - id
 - id of each product in the order
 - quantity of each product in the order
