@@ -30,7 +30,7 @@ class Orders {
     }
   }
 
-  async addProduct(order_product: {quantity: number, orderId: number, productId: number}): Promise<void> {
+  async addProduct(order_product: { quantity: number; orderId: number; productId: number }): Promise<void> {
     // add product to order
     try {
       const connection = await client.connect();

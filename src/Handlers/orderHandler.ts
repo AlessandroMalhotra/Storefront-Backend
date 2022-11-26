@@ -21,7 +21,7 @@ const addProduct = async (req: express.Request, res: express.Response): Promise<
   const order_product = {
     quantity: req.body.quantity,
     orderId: Number(req.params.order_id),
-    productId: req.body.product_id
+    productId: req.body.product_id,
   };
   try {
     const addedProduct = await orders.addProduct(order_product);
@@ -30,6 +30,6 @@ const addProduct = async (req: express.Request, res: express.Response): Promise<
   } catch (error) {
     throw new Error(`${error}`);
   }
-}
+};
 
-export { create, addProduct};
+export { create, addProduct };

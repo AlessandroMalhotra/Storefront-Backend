@@ -17,7 +17,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create user N[token required] Done
 - Sign in/Sign up - Done
 #### Orders
-- Current Order by user (args: user id)[token required] - Done- 
+- add product to active order
+- Current Order by user (args: user id)[token required] - Done - 
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO
 
 ## Data Shapes

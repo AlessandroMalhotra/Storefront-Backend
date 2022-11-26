@@ -1,6 +1,6 @@
 import express from 'express';
 import { index, show, create, signIn } from '../../Handlers/userHandler';
-import verifyAuthToken from '../../Middleware/verifyToken';
+import verifyAuthToken from '../../Middleware/Authentication/verifyToken';
 
 const users = express.Router();
 
