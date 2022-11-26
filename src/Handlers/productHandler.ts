@@ -30,7 +30,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
     name: req.body.name,
     price: Number(req.body.price),
     category: req.body.category,
-    quantity: req.body.quantity
+    quantity: req.body.quantity,
   };
 
   try {

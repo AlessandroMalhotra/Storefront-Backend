@@ -8,12 +8,12 @@ import router from './Routes/index';
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST as string;
 
-const corsOptions = { 
+const corsOptions = {
   origin: '*',
   methods: 'GET,POST',
   allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200
-}
+  optionsSuccessStatus: 200,
+};
 
 const app = express();
 

@@ -60,32 +60,17 @@ class UserAccounts {
     }
   }
 
-  async addProduct(quantity: Number, orderId: Number, productId: Number): Promise<void> {
-    // add product to order
-    try {
-      const connection = await client.connect();
-      const sql = 'INSERT INTO order_product(quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
-      const result = await connection.query(sql, [quantity, orderId, productId]);
-      const orderProduct = result.rows[0];
-
-      connection.release();
-      return orderProduct;
-    } catch (error) {
-      throw new Error(`Can't add ${productId} to order ${orderId} due to: ${error}`);
-    }
-  }
-  
   async authenticate(u: User): Promise<User | null> {
     try {
       const connection = await client.connect();
       const sql = 'SELECT password FROM users WHERE username = ($1)';
-      
+
       const result = await connection.query(sql, [u.username]);
 
-      if(result.rows.length) {
-        const user = result.rows[0]
+      if (result.rows.length) {
+        const user = result.rows[0];
 
-        if(bcrypt.compareSync(u.password + BCRYPT_PASSWORD, user.password)) {
+        if (bcrypt.compareSync(u.password + BCRYPT_PASSWORD, user.password)) {
           connection.release();
           return user;
         }

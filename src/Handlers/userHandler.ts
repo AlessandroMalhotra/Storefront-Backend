@@ -33,48 +33,46 @@ const create = async (req: express.Request, res: express.Response): Promise<void
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     username: req.body.username,
-    password: req.body.password
-  }
+    password: req.body.password,
+  };
   try {
     const newUser = await userAccount.create(user);
     let token: string;
 
-    if(newUser.username === 'admin'){
-      token = jwt.sign({username:newUser.username, password:newUser.password, admin: true}, SECRET);
+    if (newUser.username === 'admin') {
+      token = jwt.sign({ username: newUser.username, password: newUser.password, admin: true }, SECRET);
     } else {
-      token = jwt.sign({username:newUser.username, password:newUser.password, admin: false}, SECRET);
+      token = jwt.sign({ username: newUser.username, password: newUser.password, admin: false }, SECRET);
     }
-    
+
     res.json(token);
   } catch (error) {
-    // throw error here with status code need to look into it. 
+    // throw error here with status code need to look into it.
   }
 };
 
-const signIn = async (req:express.Request, res: express.Response): Promise<void> => {
+const signIn = async (req: express.Request, res: express.Response): Promise<void> => {
   const user: User = {
     username: req.body.username,
-    password: req.body.password
-  }
+    password: req.body.password,
+  };
   console.log(user);
 
   try {
     let token;
     const userPassword = await userAccount.authenticate(user);
-    
-    if(userPassword) {
-      
-      if(user.username === 'admin'){
-        token = jwt.sign({username: user.username, password: userPassword.password, admin: true}, SECRET);
+
+    if (userPassword) {
+      if (user.username === 'admin') {
+        token = jwt.sign({ username: user.username, password: userPassword.password, admin: true }, SECRET);
       } else {
-        token = jwt.sign({username: user.username, password: userPassword.password, admin: false}, SECRET);
+        token = jwt.sign({ username: user.username, password: userPassword.password, admin: false }, SECRET);
       }
     }
     res.json(token);
   } catch (error) {
     res.send(`Can't sign in due to ${error}.`);
   }
-
-}
+};
 
 export { index, show, create, signIn };
