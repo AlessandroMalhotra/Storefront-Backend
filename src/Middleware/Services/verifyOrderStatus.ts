@@ -1,5 +1,4 @@
 import express, { NextFunction } from 'express';
-import { isBreakStatement } from 'typescript';
 import client from '../../Database/database';
 
 const orderStatus = async (req: express.Request, res: express.Response, next: NextFunction): Promise<void> => {
@@ -20,12 +19,14 @@ const orderStatus = async (req: express.Request, res: express.Response, next: Ne
 };
 
 const verifyStatus = (status: string, next: NextFunction): void => {
-  
   switch (status) {
     case 'active':
       next();
       break;
     case 'completed':
-      // error handling middleware 
+      next(`Unable to add product to order as order status is ${status}`);
+      break;
   }
 }
+
+export default orderStatus;

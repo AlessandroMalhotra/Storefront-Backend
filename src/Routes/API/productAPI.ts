@@ -6,8 +6,10 @@ const products = express.Router();
 
 products.get('/', index);
 
-products.get('/id', show);
+products.get('/productid', show);
 
 products.post('/newproduct', verifyAuthToken, create);
+
+products.get('/productcategory', 'dashboard file');
 
 export default products;
