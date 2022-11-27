@@ -12,7 +12,7 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
   try {
     const user = await userAccount.index();
     if (!user.length) {
-      throw new NotFoundError('No products found.')
+      throw new NotFoundError('No users found.')
     }
     res.send(user);
   } catch (error) {
@@ -62,11 +62,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
     res.json(token);
   } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
+    res.status(400).send(error);
   }
 };
 
@@ -92,7 +88,11 @@ const signIn = async (req: express.Request, res: express.Response): Promise<void
     }
     res.json(token);
   } catch (error) {
-    res.send(`Can't sign in due to ${error}.`);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 

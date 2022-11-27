@@ -1,5 +1,5 @@
 import express from 'express';
-import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
+import { BadRequestError, NotFoundError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import { Orders, Order } from '../Models/orders';
 
 const orders = new Orders();
@@ -11,6 +11,10 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   };
   try {
     const newOrder = await orders.create(order);
+
+    if (newOrder === undefined) {
+      throw new NotFoundError(`No user with ${order.user_id} exists. Unable to create order.`);
+    }
 
     res.send(newOrder);
   } catch (error) {
@@ -24,12 +28,15 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
 const addProduct = async (req: express.Request, res: express.Response): Promise<void> => {
   const order_product = {
-    quantity: req.body.quantity,
+    quantity: Number(req.body.quantity),
     orderId: Number(req.params.order_id),
-    productId: req.body.product_id,
+    productId: Number(req.body.product_id),
   };
   try {
     const addedProduct = await orders.addProduct(order_product);
+    if (addedProduct === undefined) {
+      throw new NotFoundError(`Unable to add ${order_product.productId} to order ${order_product.orderId} as orderId or productId doesn't exist`)
+    }
 
     res.send(addedProduct);
   } catch (error) {

@@ -53,11 +53,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
     const product = await productStore.create(newProduct);
     res.send(product);
   } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
+    res.status(400).send(error);
   }
 };
 

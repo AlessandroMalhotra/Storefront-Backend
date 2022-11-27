@@ -8,7 +8,7 @@ type Order = {
 };
 
 class Orders {
-  async create(order: Order): Promise<void> {
+  async create(order: Order): Promise<Order> {
     try {
       const connection = await client.connect();
       const sql = 'INSERT INTO orders(status, user_id) VALUES ($1, $2) RETURNING *';
@@ -31,7 +31,7 @@ class Orders {
     }
   }
 
-  async addProduct(order_product: { quantity: number; orderId: number; productId: number }): Promise<void> {
+  async addProduct(order_product: { quantity: number; orderId: number; productId: number }): Promise<Order> {
     // add product to order
     try {
       const connection = await client.connect();
