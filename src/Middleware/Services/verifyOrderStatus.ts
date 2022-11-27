@@ -3,7 +3,7 @@ import client from '../../Database/database';
 
 const orderStatus = async (req: express.Request, res: express.Response, next: NextFunction): Promise<void> => {
   const order_id = req.params.id;
-  let status: string
+  let status: string;
   try {
     const connection = await client.connect();
     const sql = 'SELECT status FROM orders WHERE id = ($1)';
@@ -24,9 +24,10 @@ const verifyStatus = (status: string, next: NextFunction): void => {
       next();
       break;
     case 'completed':
+      // see if can use a error handler middleware specifically for this route 
       next(`Unable to add product to order as order status is ${status}`);
       break;
   }
-}
+};
 
 export default orderStatus;

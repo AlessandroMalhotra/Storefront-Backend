@@ -1,7 +1,7 @@
 import client from '../Database/database';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { userInfo } from 'os';
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
 dotenv.config();
 
 const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
@@ -25,7 +25,7 @@ class UserAccounts {
       connection.release();
       return user.rows;
     } catch (error) {
-      throw new Error(`Cannot show users ${error}`);
+      throw new BadRequestError(`Cannot get users credentials due to the following error: ${error}`);
     }
   }
 
@@ -40,7 +40,7 @@ class UserAccounts {
       connection.release();
       return user;
     } catch (error) {
-      throw new Error(`Cannot get specifc user ${error}`);
+      throw new BadRequestError(`Cannot get the user ${id} due to the following error: ${error}`);
     }
   }
 
@@ -56,7 +56,7 @@ class UserAccounts {
       connection.release();
       return user;
     } catch (error) {
-      throw new Error(`Cannot insert user into database ${error}`);
+      throw new BadRequestError(`Cannot create user due to the following error: ${error}`);
     }
   }
 
@@ -77,7 +77,7 @@ class UserAccounts {
       }
       return null;
     } catch (error) {
-      throw new Error('Cannot sign in with username and password.');
+      throw new BadRequestError(`Cannot sign in with username or password due to following error: ${error}`);;
     }
   }
 }

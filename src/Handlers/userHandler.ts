@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
+import { NotFoundError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
 import { UserAccounts, User } from '../Models/user';
 
 const SECRET = process.env.SECRET as Secret;
@@ -47,7 +48,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
     res.json(token);
   } catch (error) {
-    // throw error here with status code need to look into it.
+    res.send(error);
   }
 };
 
@@ -68,6 +69,8 @@ const signIn = async (req: express.Request, res: express.Response): Promise<void
       } else {
         token = jwt.sign({ username: user.username, password: userPassword.password, admin: false }, SECRET);
       }
+    } else {
+      throw new NotFoundError('User not found with those credentials please try again.')
     }
     res.json(token);
   } catch (error) {

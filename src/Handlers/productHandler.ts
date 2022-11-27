@@ -1,44 +1,54 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
 import { ProductStore, Product } from '../Models/product';
+import { ApplicationError } from '../ErrorClasses/baseErrorClass';
+import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
 
 const productStore = new ProductStore();
 
 const index = async (req: express.Request, res: express.Response): Promise<void> => {
   try {
     const product = await productStore.index();
-    res.send(product);
+    if (!product.length) {
+      throw new NotFoundError('No products found.')
+    }
+    res.send(product).status(200);
   } catch (error) {
-    res.send(`Cannot get users due to ${error}.`);
+    res.status(404).send(error);
   }
 };
 
 const show = async (req: express.Request, res: express.Response): Promise<void> => {
-  const productId = Number(req.body.id);
-  console.log(productId);
+  const productId = Number(req.params.id);
+  let product: Product;
 
   try {
-    const product = await productStore.show(productId);
-
-    res.send(product);
+    product = await productStore.show(productId);
+    console.log(product);
+    if (product === undefined) {
+      // throw new NotFoundError('Product with given id not found.')
+      throw new NotFoundError('Product with given id not found.');
+    }
+    res.send(product).status(200);
   } catch (error) {
-    res.send(`Cannot get user by id ${productId}, ${error}.`);
+    res.status(404).send(error);
   }
+
+
 };
 
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
   const newProduct: Product = {
     name: req.body.name,
-    price: Number(req.body.price),
+    price: req.body.price,
     category: req.body.category,
     quantity: req.body.quantity,
   };
 
   try {
     const product = await productStore.create(newProduct);
-
-    res.send(product);
+    res.send(product).status(200);
   } catch (error) {
-    res.send(`Cannot add new product ${error}`);
+    res.send(error);
   }
 };
 
