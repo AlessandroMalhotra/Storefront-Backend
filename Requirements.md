@@ -18,6 +18,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Sign in/Sign up - Done
 #### Orders
 - add product to active order - Done
+- Update order status - TODO
 - Current Order by user (args: user id)[token required] - Dashboard query
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] - Dashboard query
 

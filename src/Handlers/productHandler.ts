@@ -1,7 +1,7 @@
 import express, { NextFunction } from 'express';
 import { ProductStore, Product } from '../Models/product';
 import { ApplicationError } from '../ErrorClasses/baseErrorClass';
-import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
+import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 
 const productStore = new ProductStore();
 
@@ -11,9 +11,13 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
     if (!product.length) {
       throw new NotFoundError('No products found.')
     }
-    res.send(product).status(200);
+    res.send(product);
   } catch (error) {
-    res.status(404).send(error);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 
@@ -23,17 +27,18 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
 
   try {
     product = await productStore.show(productId);
-    console.log(product);
     if (product === undefined) {
       // throw new NotFoundError('Product with given id not found.')
       throw new NotFoundError('Product with given id not found.');
     }
-    res.send(product).status(200);
+    res.send(product);
   } catch (error) {
-    res.status(404).send(error);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
-
-
 };
 
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
@@ -46,9 +51,13 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
   try {
     const product = await productStore.create(newProduct);
-    res.send(product).status(200);
+    res.send(product);
   } catch (error) {
-    res.send(error);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 

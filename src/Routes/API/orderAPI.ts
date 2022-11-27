@@ -11,6 +11,4 @@ orders.post('/orders/:id/product', verifyAuthToken, orderStatus, addProduct);
 
 // need update order status function
 
-// maybe delete order function too
-
 export default orders;

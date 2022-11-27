@@ -1,6 +1,6 @@
 import { Connection } from 'pg';
 import client from '../Database/database';
-import { BadRequestError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError'
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError'
 import products from '../Routes/API/productAPI';
 
 type Product = {
@@ -38,7 +38,7 @@ class ProductStore {
       connection.release();
       return product;
     } catch (error) {
-      throw new BadRequestError(`Cannot get the product ${id} due to the following error: ${error}`);
+      throw new BadRequestError(`Cannot get the product due to the following error: ${error}`);
     }
   }
 

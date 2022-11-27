@@ -1,5 +1,6 @@
 import express, { NextFunction } from 'express';
 import client from '../../Database/database';
+import { BadRequestError } from '../../ErrorClasses/UserFacingErrors/userFacingError';
 
 const orderStatus = async (req: express.Request, res: express.Response, next: NextFunction): Promise<void> => {
   const order_id = req.params.id;
@@ -14,7 +15,7 @@ const orderStatus = async (req: express.Request, res: express.Response, next: Ne
     connection.release();
     verifyStatus(status, next);
   } catch (error) {
-    res.send(`${error}`);
+    throw new BadRequestError(`Cannot get the status of the order due to the following error: ${error}`);
   }
 };
 

@@ -1,7 +1,7 @@
 import client from '../Database/database';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { BadRequestError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 dotenv.config();
 
 const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;

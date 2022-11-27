@@ -1,4 +1,5 @@
 import express from 'express';
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import { Orders, Order } from '../Models/orders';
 
 const orders = new Orders();
@@ -13,7 +14,11 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
     res.send(newOrder);
   } catch (error) {
-    throw new Error(`Unable to create order due to ${error}`);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 
@@ -28,7 +33,11 @@ const addProduct = async (req: express.Request, res: express.Response): Promise<
 
     res.send(addedProduct);
   } catch (error) {
-    throw new Error(`${error}`);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 

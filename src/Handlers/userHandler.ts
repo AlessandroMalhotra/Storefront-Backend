@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
-import { NotFoundError } from '../ErrorClasses/UserFacingErrors.ts/userFacingError';
+import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import { UserAccounts, User } from '../Models/user';
 
 const SECRET = process.env.SECRET as Secret;
@@ -11,9 +11,16 @@ const userAccount = new UserAccounts();
 const index = async (req: express.Request, res: express.Response): Promise<void> => {
   try {
     const user = await userAccount.index();
+    if (!user.length) {
+      throw new NotFoundError('No products found.')
+    }
     res.send(user);
   } catch (error) {
-    res.send(`Cannot get users due to ${error}.`);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 
@@ -23,9 +30,16 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
 
   try {
     const user = await userAccount.show(userId);
+    if (user === undefined) {
+      throw new NotFoundError(`Cannot get user by id ${userId},`);
+    }
     res.json(user);
   } catch (error) {
-    res.send(`Cannot get user by id ${userId}, ${error}.`);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 
@@ -48,7 +62,11 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 
     res.json(token);
   } catch (error) {
-    res.send(error);
+    if (error instanceof BadRequestError) {
+      res.status(400).send(error);
+    } else {
+      res.status(404).send(error);
+    }
   }
 };
 

@@ -1,4 +1,5 @@
 import client from '../Database/database';
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 
 type Order = {
   id?: number;
@@ -17,7 +18,7 @@ class Orders {
       connection.release();
       return newOrder;
     } catch (error) {
-      throw new Error(`Can't create new order due to: ${error}`);
+      throw new BadRequestError(`Can't create new order due to: ${error}`);
     }
   }
 
@@ -41,7 +42,7 @@ class Orders {
       connection.release();
       return orderProduct;
     } catch (error) {
-      throw new Error(`Can't add ${order_product.productId} to order ${order_product.orderId} due to: ${error}`);
+      throw new BadRequestError(`Can't add ${order_product.productId} to order ${order_product.orderId} due to: ${error}`);
     }
   }
 }
