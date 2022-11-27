@@ -8,7 +8,7 @@ describe('Test user model functions', () => {
         firstName: 'sandro',
         lastName: 'malhotra',
         password: 'password',
-        username: 'sandro25'
+        username: 'sandro25',
     };
     it('Checks user index function correctly been defined', () => {
         expect(user.index).toBeDefined();
@@ -26,7 +26,7 @@ describe('Test user model functions', () => {
             firstName: 'sandro',
             lastName: 'malhotra',
             password: users.password,
-            username: 'sandro25'
+            username: 'sandro25',
         });
     });
     // it('Should return a list of users', async () => {
@@ -40,7 +40,7 @@ describe('Test user model functions', () => {
             firstName: 'sandro',
             lastName: 'malhotra',
             password: users.password,
-            username: 'sandro25'
+            username: 'sandro25',
         });
     });
 });

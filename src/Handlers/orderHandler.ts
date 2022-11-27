@@ -6,23 +6,15 @@ const orders = new Orders();
 
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
   const order: Order = {
-    status: req.body.satus,
+    status: req.body.status,
     user_id: Number(req.body.user_id),
   };
   try {
     const newOrder = await orders.create(order);
 
-    if (newOrder === undefined) {
-      throw new NotFoundError(`No user with ${order.user_id} exists. Unable to create order.`);
-    }
-
     res.send(newOrder);
   } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
+    res.status(400).send(error);
   }
 };
 

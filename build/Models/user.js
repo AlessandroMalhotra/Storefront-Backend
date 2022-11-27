@@ -7,6 +7,7 @@ exports.UserAccounts = void 0;
 const database_1 = __importDefault(require("../Database/database"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const userFacingError_1 = require("../ErrorClasses/UserFacingErrors/userFacingError");
 dotenv_1.default.config();
 const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
 class UserAccounts {
@@ -19,7 +20,7 @@ class UserAccounts {
             return user.rows;
         }
         catch (error) {
-            throw new Error(`Cannot show users ${error}`);
+            throw new userFacingError_1.BadRequestError(`Cannot get users credentials due to the following error: ${error}`);
         }
     }
     async show(id) {
@@ -32,7 +33,7 @@ class UserAccounts {
             return user;
         }
         catch (error) {
-            throw new Error(`Cannot get specifc user ${error}`);
+            throw new userFacingError_1.BadRequestError(`Cannot get the user due to the following error: ${error}`);
         }
     }
     async create(u) {
@@ -46,7 +47,26 @@ class UserAccounts {
             return user;
         }
         catch (error) {
-            throw new Error(`Cannot insert user into database ${error}`);
+            throw new userFacingError_1.BadRequestError(`Cannot create user due to the following error: ${error}`);
+        }
+    }
+    async authenticate(u) {
+        try {
+            const connection = await database_1.default.connect();
+            const sql = 'SELECT password FROM users WHERE username = ($1)';
+            const result = await connection.query(sql, [u.username]);
+            if (result.rows.length) {
+                const user = result.rows[0];
+                if (bcrypt_1.default.compareSync(u.password + BCRYPT_PASSWORD, user.password)) {
+                    connection.release();
+                    return user;
+                }
+            }
+            return null;
+        }
+        catch (error) {
+            throw new userFacingError_1.BadRequestError(`Cannot sign in with username or password due to following error: ${error}`);
+            ;
         }
     }
 }
