@@ -1,5 +1,5 @@
 import { HttpStatusCodes } from '../../HttpStatusCodes/httpStatusCodes';
-import { ApplicationError } from '../baseErrorClass';
+import ApplicationError  from '../baseErrorClass';
 
 class BadRequestError extends ApplicationError {
   constructor(description: string, httpCode = HttpStatusCodes.BAD_REQUEST, isOperational = false, name = 'Bad Request') {

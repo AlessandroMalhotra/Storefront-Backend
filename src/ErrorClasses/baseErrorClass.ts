@@ -19,4 +19,4 @@ class ApplicationError extends Error {
   }
 }
 
-export { ApplicationError};
+export default ApplicationError;

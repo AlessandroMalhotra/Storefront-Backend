@@ -1,6 +1,5 @@
 import express, { NextFunction } from 'express';
 import { ProductStore, Product } from '../Models/product';
-import { ApplicationError } from '../ErrorClasses/baseErrorClass';
 import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 
 const productStore = new ProductStore();
