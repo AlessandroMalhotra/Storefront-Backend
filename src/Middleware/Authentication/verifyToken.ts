@@ -10,15 +10,16 @@ const verifyAuthToken = (req: express.Request, res: express.Response, next: Next
   try {
     const authorizationHeader = req.headers.authorization as string;
     if (!authorizationHeader) {
-      throw new UnauthorizedError('Unauthrosied request to resource.');
+      throw new UnauthorizedError('Unauthrosied request to resource, no authorisation header provided.');
     }
     const token = authorizationHeader.split(' ')[1] as string;
     if (!token) {
-      throw new UnauthorizedError('Unauthrosied request to resource.');
+      throw new UnauthorizedError('Unauthrosied request to resource, no token provided.');
     }
     const decoded = jwt.verify(token, SECRET);
+    // check what verify returns so we can throw the below error.
 
-    if (decoded === undefined) {
+    if (decoded === String) {
       throw new AccessDeniedError('User does not have the permissions to access this resource.');
     }
 

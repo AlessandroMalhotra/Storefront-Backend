@@ -40,7 +40,7 @@ class UserAccounts {
       connection.release();
       return user;
     } catch (error) {
-      throw new BadRequestError(`Cannot get the user ${id} due to the following error: ${error}`);
+      throw new BadRequestError(`Cannot get the user due to the following error: ${error}`);
     }
   }
 
