@@ -14,6 +14,7 @@ class Orders {
             const result = await connection.query(sql, [order.status, order.user_id]);
             const newOrder = result.rows[0];
             connection.release();
+            console.log(newOrder);
             return newOrder;
         }
         catch (error) {

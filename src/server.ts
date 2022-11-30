@@ -28,3 +28,5 @@ app.get('/', async (req: express.Request, res: express.Response): Promise<void> 
 app.listen(PORT, HOST, function () {
   console.log(`Server listening on specified port ${PORT} and host ${HOST}`);
 });
+
+export { app };

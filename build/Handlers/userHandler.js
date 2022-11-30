@@ -30,7 +30,7 @@ const index = async (req, res) => {
 };
 exports.index = index;
 const show = async (req, res) => {
-    const userId = Number(req.body.id);
+    const userId = Number(req.params.id);
     console.log(userId);
     try {
         const user = await userAccount.show(userId);

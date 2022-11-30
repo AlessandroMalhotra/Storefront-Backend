@@ -11,7 +11,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   };
   try {
     const newOrder = await orders.create(order);
-
+    
     res.send(newOrder);
   } catch (error) {
     res.status(400).send(error);

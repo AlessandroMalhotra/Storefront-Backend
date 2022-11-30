@@ -6,23 +6,16 @@ const orders_1 = require("../Models/orders");
 const orders = new orders_1.Orders();
 const create = async (req, res) => {
     const order = {
-        status: req.body.satus,
+        status: req.body.status,
         user_id: Number(req.body.user_id),
     };
     try {
         const newOrder = await orders.create(order);
-        if (newOrder === undefined) {
-            throw new userFacingError_1.NotFoundError(`No user with ${order.user_id} exists. Unable to create order.`);
-        }
+        newOrder.user_id = Number(newOrder.user_id);
         res.send(newOrder);
     }
     catch (error) {
-        if (error instanceof userFacingError_1.BadRequestError) {
-            res.status(400).send(error);
-        }
-        else {
-            res.status(404).send(error);
-        }
+        res.status(400).send(error);
     }
 };
 exports.create = create;

@@ -6,7 +6,7 @@ const users = express.Router();
 
 users.get('/', verifyAuthToken, index);
 
-users.get('/id', verifyAuthToken, show);
+users.get('/:id', verifyAuthToken, show);
 
 users.post('/createuser', verifyAuthToken, create);
 

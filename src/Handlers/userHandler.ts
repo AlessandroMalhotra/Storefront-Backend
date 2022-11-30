@@ -25,7 +25,7 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
 };
 
 const show = async (req: express.Request, res: express.Response): Promise<void> => {
-  const userId = Number(req.body.id);
+  const userId = Number(req.params.id);
   console.log(userId);
 
   try {
