@@ -19,7 +19,7 @@ describe('Test order model functions', () => {
     fit('Create a new order for a given user.', async () => {
         const response = await order.create(newOrder);
         expect(response).toEqual({
-            id: 1,
+            id: 2,
             status: 'active',
             user_id: 2
         })

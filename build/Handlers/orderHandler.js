@@ -11,7 +11,6 @@ const create = async (req, res) => {
     };
     try {
         const newOrder = await orders.create(order);
-        newOrder.user_id = Number(newOrder.user_id);
         res.send(newOrder);
     }
     catch (error) {

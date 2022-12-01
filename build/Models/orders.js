@@ -13,8 +13,8 @@ class Orders {
             const sql = 'INSERT INTO orders(status, user_id) VALUES ($1, $2) RETURNING *';
             const result = await connection.query(sql, [order.status, order.user_id]);
             const newOrder = result.rows[0];
+            newOrder.user_id = Number(newOrder.user_id);
             connection.release();
-            console.log(newOrder);
             return newOrder;
         }
         catch (error) {
