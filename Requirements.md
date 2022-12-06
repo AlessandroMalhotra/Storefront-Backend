@@ -19,8 +19,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 - add product to active order - Done - TODO check status needs testing - Saturday 
 <!-- - Update order status - Nice to have  -->
-- Current Order by user (args: user id)[token required] - TODO Dashboard query - Saturday
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO Dashboard query - Saturday 
+- Current Order by user (args: user id)[token required] - TODO Dashboard query - DONE - look at services 
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO Dashboard query - DONE - look at services 
 
 ## Data Shapes
 #### Product - Done
