@@ -27,7 +27,6 @@ const verifyStatus = (status: string, next: NextFunction): void => {
     case 'completed':
       // see if can use a error handler middleware specifically for this route 
       throw new BadRequestError(`Unable to add product to order as the status is ${status}.`);
-      break;
   }
 };
 

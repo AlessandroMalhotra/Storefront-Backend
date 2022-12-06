@@ -14,22 +14,22 @@ describe('Test user model functions', () => {
     admin: false
   };
 
-  it('Checks user index function correctly been defined', () => {
+  fit('Checks user index function correctly been defined', () => {
     expect(user.index).toBeDefined();
   });
 
-  it('Checks user create function correctly been defined', () => {
+  fit('Checks user create function correctly been defined', () => {
     expect(user.create).toBeDefined();
   });
 
-  it('Checks user show function correctly been defined', () => {
+  fit('Checks user show function correctly been defined', () => {
     expect(user.show).toBeDefined();
   });
 
-  xit('Create a user successfully ', async () => {
+  fit('Create a user successfully ', async () => {
     const users = await user.create(newUser);
     expect(users).toEqual({
-      id: 2,
+      id: 3,
       firstName: 'sandro',
       lastName: 'malhotra',
       password: users.password,
@@ -43,12 +43,12 @@ describe('Test user model functions', () => {
   //   expect(users).toEqual([users]);
   // });
 
-  xit('Should return user by id', async () => {
+  fit('Should return user by id', async () => {
     const users = await user.show(2);
     expect(users).toEqual({
       id: 2,
-      firstName: 'sandro',
-      lastName: 'malhotra',
+      firstName: 'Alessandro',
+      lastName: 'Malhotra',
       password: users.password,
       username: 'sandro25',
       admin: false

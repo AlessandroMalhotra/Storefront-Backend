@@ -9,6 +9,6 @@ const verifyToken_1 = __importDefault(require("../../Middleware/Authentication/v
 const verifyOrderStatus_1 = __importDefault(require("../../Middleware/Services/verifyOrderStatus"));
 const orders = express_1.default.Router();
 orders.post('/neworder', verifyToken_1.default, orderHandler_1.create);
-orders.post('/orders/:id/product', verifyToken_1.default, verifyOrderStatus_1.default, orderHandler_1.addProduct);
+orders.post('/:id/product', verifyToken_1.default, verifyOrderStatus_1.default, orderHandler_1.addProduct);
 // need update order status function
 exports.default = orders;
