@@ -1,7 +1,8 @@
 import express from 'express';
-import { create, addProduct, currentOrder, completedOrder } from '../../Handlers/orderHandler';
+import { create, addProduct } from '../../Handlers/orderHandler';
+import { currentOrder, completedOrder } from '../../Services/dashboardHandler';
 import verifyAuthToken from '../../Middleware/Authentication/verifyToken';
-import orderStatus from '../../Middleware/Services/verifyOrderStatus';
+import orderStatus from '../../Middleware/OrderStatus/verifyOrderStatus';
 
 const orders = express.Router();
 
@@ -11,7 +12,7 @@ orders.post('/:id/product', verifyAuthToken, orderStatus, addProduct);
 
 orders.get('/currentorder/:id', verifyAuthToken, currentOrder);
 
-orders.get('/completedorder/id', verifyAuthToken, completedOrder);
+orders.get('/completedorder/:id', verifyAuthToken, completedOrder);
 
 // need update order status function
 

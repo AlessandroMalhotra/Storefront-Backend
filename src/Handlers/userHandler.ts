@@ -12,7 +12,7 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
   try {
     const user = await userAccount.index();
     if (!user.length) {
-      throw new NotFoundError('No users found.')
+      throw new NotFoundError('No users found.');
     }
     res.send(user);
   } catch (error) {
@@ -84,7 +84,7 @@ const signIn = async (req: express.Request, res: express.Response): Promise<void
         token = jwt.sign({ username: user.username, password: userPassword.password, admin: false }, SECRET);
       }
     } else {
-      throw new NotFoundError('User not found with those credentials please try again.')
+      throw new NotFoundError('User not found with those credentials please try again.');
     }
     res.json(token);
   } catch (error) {

@@ -1,4 +1,3 @@
-import { Object } from 'lodash';
 import client from '../Database/database';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 
@@ -6,8 +5,6 @@ type Order = {
   id?: number;
   status: string;
   user_id: number;
-  order_id?: number;
-  product_id?: number;
 };
 
 class Orders {
@@ -48,20 +45,6 @@ class Orders {
       return orderProduct;
     } catch (error) {
       throw new BadRequestError(`Can't add ${order_product.productId} to order ${order_product.orderId} due to: ${error}`);
-    }
-  }
-  
-  async userOrder(user_id: Number): Promise<Order> {
-    try {
-      const connection = await client.connect();
-      const sql = 'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE status = "active" AND user_id = 1;';
-      const result = await connection.query(sql, [user_id]);
-      const activeOrder = result.rows[0];
-
-      connection.release();
-      return activeOrder;
-    } catch (error) {
-      throw new BadRequestError(`Can't find any active orders for user due to: ${error}`);
     }
   }
 }

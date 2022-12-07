@@ -7,9 +7,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Products
 - Index Done
 - Show Done
-- Create [token required] Done
-- [OPTIONAL] Top 5 most popular products - TODO - Don't do until unique names and quantity of record is sorted. Sunday
-- [OPTIONAL] Products by category (args: product category) -TODO Dashboard query - Sunday
+- Create [token required] Done - unique names and quantity of record needs sorting
+- [OPTIONAL] Top 5 most popular products - TODO - Dashboard query 
+- [OPTIONAL] Products by category (args: product category) - Done
 
 #### Users
 - Index [token required] Done 
@@ -19,8 +19,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 - add product to active order - Done - TODO check status needs testing - Saturday 
 <!-- - Update order status - Nice to have  -->
-- Current Order by user (args: user id)[token required] - TODO Dashboard query - DONE - look at services 
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] - TODO Dashboard query - DONE - look at services 
+- Current Order by user (args: user id)[token required] - Done
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] - Done 
 
 ## Data Shapes
 #### Product - Done

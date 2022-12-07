@@ -12,7 +12,7 @@ type User = {
   lastName?: string;
   username: string;
   password: string;
-  admin?: false
+  admin?: false;
 };
 
 class UserAccounts {
@@ -78,7 +78,7 @@ class UserAccounts {
       }
       return null;
     } catch (error) {
-      throw new BadRequestError(`Cannot sign in with username or password due to following error: ${error}`);;
+      throw new BadRequestError(`Cannot sign in with username or password due to following error: ${error}`);
     }
   }
 }

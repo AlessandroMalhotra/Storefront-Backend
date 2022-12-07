@@ -1,6 +1,6 @@
 import { Connection } from 'pg';
 import client from '../Database/database';
-import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError'
+import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import products from '../Routes/API/productAPI';
 
 type Product = {
@@ -43,8 +43,10 @@ class ProductStore {
   }
 
   async create(p: Product): Promise<Product | null> {
-    /**  Need to change product database so it only allows same product name once and quantity column 
-         then here check if product name exists if so just increase quantity 
+    /* 
+     Convert name to lower case and remove all the whitespaces.
+     You can then compare it to other products see if it is there before adding and increase the quantity.
+     Two Try blocks 
      */
     try {
       const connection = await client.connect();

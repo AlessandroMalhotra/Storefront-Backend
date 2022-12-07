@@ -8,7 +8,7 @@ describe('Test product model functions', () => {
     name: 'Nike Air Force 1',
     price: 135,
     category: 'Trainers',
-    quantity: 1
+    quantity: 1,
   };
   fit('Checks product index method correctly defined', async () => {
     expect(product.index).toBeDefined();
@@ -39,7 +39,7 @@ describe('Test product model functions', () => {
       name: 'Nike Air Force 1',
       price: 135,
       category: 'Trainers',
-      quantity: 1
+      quantity: 1,
     });
   });
 
@@ -50,7 +50,7 @@ describe('Test product model functions', () => {
       name: 'Nike Air Force 1',
       price: 135,
       category: 'Trainers',
-      quantity: 1
+      quantity: 1,
     });
   });
 });

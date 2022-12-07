@@ -8,7 +8,7 @@ const index = async (req: express.Request, res: express.Response): Promise<void>
   try {
     const product = await productStore.index();
     if (!product.length) {
-      throw new NotFoundError('No products found.')
+      throw new NotFoundError('No products found.');
     }
     res.send(product);
   } catch (error) {

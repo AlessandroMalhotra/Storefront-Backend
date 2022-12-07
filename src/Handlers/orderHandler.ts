@@ -11,7 +11,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   };
   try {
     const newOrder = await orders.create(order);
-    
+
     res.send(newOrder);
   } catch (error) {
     res.status(400).send(error);
@@ -27,7 +27,7 @@ const addProduct = async (req: express.Request, res: express.Response): Promise<
   try {
     const addedProduct = await orders.addProduct(orderProduct);
     if (addedProduct === undefined) {
-      throw new NotFoundError(`Unable to add ${orderProduct.productId} to order ${orderProduct.orderId} as orderId or productId doesn't exist`)
+      throw new NotFoundError(`Unable to add ${orderProduct.productId} to order ${orderProduct.orderId} as orderId or productId doesn't exist`);
     }
 
     res.send(addedProduct);
@@ -40,38 +40,4 @@ const addProduct = async (req: express.Request, res: express.Response): Promise<
   }
 };
 
-const currentOrder = async (req: express.Request, res: express.Response): Promise<void> => {
-  const usersID =  Number(req.params.user_id);
-  try {
-    const activeOrders = await orders.userOrder(usersID);
-    if (activeOrders === undefined) {
-      throw new NotFoundError(`No active orders for user ${usersID}`)
-    }
-    res.send(activeOrders);
-  } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
-  }
-};
-
-const completedOrder = async (req: express.Request, res: express.Response): Promise<void> => {
-  const usersID =  Number(req.params.user_id);
-  try {
-    const activeOrders = await orders.userOrder(usersID);
-    if (activeOrders === undefined) {
-      throw new NotFoundError(`No active orders for user ${usersID}`)
-    }
-    res.send(activeOrders);
-  } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
-  }
-};
-
-export { create, addProduct, currentOrder, completedOrder };
+export { create, addProduct };

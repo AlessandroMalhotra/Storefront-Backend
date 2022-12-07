@@ -11,7 +11,7 @@ describe('Test user model functions', () => {
     lastName: 'malhotra',
     password: 'password',
     username: 'sandro25',
-    admin: false
+    admin: false,
   };
 
   fit('Checks user index function correctly been defined', () => {
@@ -34,7 +34,7 @@ describe('Test user model functions', () => {
       lastName: 'malhotra',
       password: users.password,
       username: 'sandro25',
-      admin: false
+      admin: false,
     });
   });
 
@@ -51,7 +51,7 @@ describe('Test user model functions', () => {
       lastName: 'Malhotra',
       password: users.password,
       username: 'sandro25',
-      admin: false
+      admin: false,
     });
   });
 });
