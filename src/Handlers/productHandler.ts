@@ -27,7 +27,6 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
   try {
     product = await productStore.show(productId);
     if (product === undefined) {
-      // throw new NotFoundError('Product with given id not found.')
       throw new NotFoundError('Product with given id not found.');
     }
     res.send(product);
@@ -40,6 +39,7 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
   }
 };
 
+
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
   const newProduct: Product = {
     name: req.body.name,
@@ -49,6 +49,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   };
 
   try {
+    await productStore.productExists(newProduct.name);
     const product = await productStore.create(newProduct);
     res.send(product);
   } catch (error) {

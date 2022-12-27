@@ -21,7 +21,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
 const addProduct = async (req: express.Request, res: express.Response): Promise<void> => {
   const orderProduct = {
     quantity: Number(req.body.quantity),
-    orderId: Number(req.params.order_id),
+    orderId: Number(req.body.order_id),
     productId: Number(req.body.product_id),
   };
   try {

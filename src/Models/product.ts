@@ -18,7 +18,6 @@ class ProductStore {
       const sql = 'SELECT * FROM product';
 
       const product = await connection.query(sql);
-      //console.log(product);
 
       connection.release();
       return product.rows;
@@ -42,12 +41,37 @@ class ProductStore {
     }
   }
 
-  async create(p: Product): Promise<Product | null> {
+  async productExists(name: string): Promise<Boolean> {
+    try {
+      let productName = name.replace(/\s/g, '').toLowerCase();
+      const connection = await client.connect();
+      const sql = 'SELECT name FROM product';
+      const result = await connection.query(sql);
+      
+      let names = result.rows;
+      names = Object.values(names);
+  
+      for (let product of names) {
+        product = product.replace(/\s/g, '').toLowerCase();
+  
+        if (product == productName) {
+          throw new BadRequestError(`Product with name ${name} already exists.`);
+        }
+      }
+      connection.release();
+      return true;
+    } catch (error) {
+      throw new BadRequestError(`Product with name ${name} already exists.`);
+    }
+  };
+  
+  async create(p: Product): Promise<Product | unknown> {
     /* 
      Convert name to lower case and remove all the whitespaces.
      You can then compare it to other products see if it is there before adding and increase the quantity.
-     Two Try blocks 
+     Do this as middelware 
      */
+
     try {
       const connection = await client.connect();
       const sql = 'INSERT INTO product (name, price, category, quantity) VALUES ($1, $2, $3, $4) RETURNING *';
@@ -58,7 +82,6 @@ class ProductStore {
       connection.release();
       return product;
     } catch (error) {
-      console.log(`${error}`);
       throw new BadRequestError(`Cannot insert product to the database due to the following ${error}`);
     }
   }

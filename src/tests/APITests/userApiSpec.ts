@@ -26,13 +26,13 @@ describe('Test User Endpoint Responses', () => {
     token = response.body;
   });
 
-  fit('Sign a user in with the given credentials', async () => {
+  it('Sign a user in with the given credentials', async () => {
     const response = await server.post('/users/signin').send(admin);
     expect(response.status).toBe(200);
     expect(response.body.token);
   });
 
-  fit('Show all users and correct token passed', async () => {
+  it('Show all users and correct token passed', async () => {
     const response = await server.get('/users').set('Authorization', `Bearer ${token}`).send('1');
 
     expect(response.status).toBe(200);
@@ -47,16 +47,16 @@ describe('Test User Endpoint Responses', () => {
       },
     ]);
   });
-
-  fit('Create a user with the given credentials and admin token passed', async () => {
+  
+  it('Create a user with the given credentials and admin token passed', async () => {
     const response = await server.post('/users/createuser').set('Authorization', `Bearer ${token}`).send(user);
 
     expect(response.status).toBe(200);
     expect(response.body.token);
   });
-
-  fit('Show a user by id and correct token passed', async () => {
-    const response = await server.get('/users/2').set('Authorization', `Bearer ${token}`).send('1');
+  
+  it('Show a user by id and correct token passed', async () => {
+    const response = await server.get('/users/2').set('Authorization', `Bearer ${token}`).send('2');
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({

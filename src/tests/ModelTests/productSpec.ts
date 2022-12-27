@@ -1,3 +1,4 @@
+import { BadRequestError, NotFoundError } from '../../ErrorClasses/UserFacingErrors/userFacingError';
 import { Product, ProductStore } from '../../Models/product';
 
 const product = new ProductStore();
@@ -10,29 +11,32 @@ describe('Test product model functions', () => {
     category: 'Trainers',
     quantity: 1,
   };
-  fit('Checks product index method correctly defined', async () => {
+  it('Checks product index method correctly defined', async () => {
     expect(product.index).toBeDefined();
   });
 
-  fit('Checks product create function correctly been defined', () => {
+  it('Checks product create function correctly been defined', () => {
     expect(product.create).toBeDefined();
   });
 
-  fit('Checks product show function correctly been defined', () => {
+  it('Checks product show function correctly been defined', () => {
     expect(product.show).toBeDefined();
   });
 
-  fit('Should return a list of products', async () => {
-    const products = await product.index();
-    expect(products).toEqual([{ id: 1, name: 'Nike Air Force 1', price: 135, category: 'Trainers', quantity: 1 }]);
-  });
-
-  fit('Should return a list of products', async () => {
+  it('Should return a list of products', async () => {
     const newP = await product.index();
-    expect(newP).toEqual([newProduct]);
+    expect(newP).toEqual([
+      {
+        id: 1,
+        name: 'Nike Air Force 1',
+        price: 135,
+        category: 'Trainers',
+        quantity: 1
+      }
+    ])
   });
 
-  fit('Should return product by id', async () => {
+  it('Should return product by id', async () => {
     const newP = await product.show(1);
     expect(newP).toEqual({
       id: 1,
@@ -44,13 +48,18 @@ describe('Test product model functions', () => {
   });
 
   it('Insert a product entry successfully ', async () => {
-    const newP = await product.create(newProduct);
-    expect(newP).toEqual({
-      id: 1,
-      name: 'Nike Air Force 1',
-      price: 135,
+    const newP = await product.create({
+      name: 'Nike Dunk Low Disrupt',
+      price: 115,
       category: 'Trainers',
-      quantity: 1,
+      quantity: 2,
+    });
+    expect(newP).toEqual({
+      id: 2,
+      name: 'Nike Dunk Low Disrupt',
+      price: 115,
+      category: 'Trainers',
+      quantity: 2,
     });
   });
 });

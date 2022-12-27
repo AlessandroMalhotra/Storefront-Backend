@@ -8,8 +8,8 @@ const supertest_1 = __importDefault(require("supertest"));
 const server = (0, supertest_1.default)(server_1.app);
 describe('Test the verification of a Token', () => {
     const admin = {
-        username: "admin",
-        password: "admin"
+        username: 'admin',
+        password: 'admin',
     };
     let token;
     beforeAll(async () => {
@@ -19,7 +19,7 @@ describe('Test the verification of a Token', () => {
         expect(response.body.token);
         token = response.body;
     });
-    fit('Test that a token is valid from a successfull sign in.', async () => {
-        // 
+    xit('Test that a token is valid from a successfull sign in.', async () => {
+        //
     });
 });

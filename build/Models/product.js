@@ -12,7 +12,6 @@ class ProductStore {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM product';
             const product = await connection.query(sql);
-            //console.log(product);
             connection.release();
             return product.rows;
         }
@@ -33,9 +32,33 @@ class ProductStore {
             throw new userFacingError_1.BadRequestError(`Cannot get the product due to the following error: ${error}`);
         }
     }
+    async productExists(name) {
+        try {
+            let productName = name.replace(/\s/g, '').toLowerCase();
+            const connection = await database_1.default.connect();
+            const sql = 'SELECT name FROM product';
+            const result = await connection.query(sql);
+            let names = result.rows;
+            names = Object.values(names);
+            for (let product of names) {
+                product = product.replace(/\s/g, '').toLowerCase();
+                if (product == productName) {
+                    throw new userFacingError_1.BadRequestError(`Product with name ${name} already exists.`);
+                }
+            }
+            connection.release();
+            return true;
+        }
+        catch (error) {
+            throw new userFacingError_1.BadRequestError(`Product with name ${name} already exists.`);
+        }
+    }
+    ;
     async create(p) {
-        /**  Need to change product database so it only allows same product name once and quantity column
-             then here check if product name exists if so just increase quantity
+        /*
+         Convert name to lower case and remove all the whitespaces.
+         You can then compare it to other products see if it is there before adding and increase the quantity.
+         Do this as middelware
          */
         try {
             const connection = await database_1.default.connect();
@@ -46,7 +69,6 @@ class ProductStore {
             return product;
         }
         catch (error) {
-            console.log(`${error}`);
             throw new userFacingError_1.BadRequestError(`Cannot insert product to the database due to the following ${error}`);
         }
     }

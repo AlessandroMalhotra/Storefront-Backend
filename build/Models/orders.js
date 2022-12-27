@@ -21,22 +21,22 @@ class Orders {
             throw new userFacingError_1.BadRequestError(`Can't create new order due to: ${error}`);
         }
     }
-    async update(order_id) {
-        try {
-            const connection = await database_1.default.connect();
-            // update an order
-        }
-        catch (error) {
-            // throw error here
-        }
-    }
+    // async update(order_id: number): Promise<void> {
+    //   try {
+    //     const connection = await client.connect();
+    //     // update an order
+    //   } catch (error) {
+    //     // throw error here
+    //   }
+    // }
     async addProduct(order_product) {
         // add product to order
         try {
             const connection = await database_1.default.connect();
-            const sql = 'INSERT INTO order_product(quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
+            const sql = 'INSERT INTO order_products(quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
             const result = await connection.query(sql, [order_product.quantity, order_product.orderId, order_product.productId]);
             const orderProduct = result.rows[0];
+            console.log(orderProduct);
             connection.release();
             return orderProduct;
         }

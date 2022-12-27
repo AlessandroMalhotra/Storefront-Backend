@@ -11,4 +11,3 @@ var HttpStatusCodes;
     HttpStatusCodes[HttpStatusCodes["INTERNAL_SERVER"] = 500] = "INTERNAL_SERVER";
 })(HttpStatusCodes || (HttpStatusCodes = {}));
 exports.HttpStatusCodes = HttpStatusCodes;
-;

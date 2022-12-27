@@ -28,7 +28,6 @@ const show = async (req, res) => {
     try {
         product = await productStore.show(productId);
         if (product === undefined) {
-            // throw new NotFoundError('Product with given id not found.')
             throw new userFacingError_1.NotFoundError('Product with given id not found.');
         }
         res.send(product);
@@ -51,6 +50,7 @@ const create = async (req, res) => {
         quantity: req.body.quantity,
     };
     try {
+        await productStore.productExists(newProduct.name);
         const product = await productStore.create(newProduct);
         res.send(product);
     }

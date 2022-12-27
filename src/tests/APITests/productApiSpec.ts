@@ -3,10 +3,11 @@ import { app } from '../../server';
 import { Product } from '../../Models/product';
 import { User } from '../../Models/user';
 import supertest from 'supertest';
+import { after } from 'lodash';
 
 const server = supertest(app);
 
-describe('Test User Endpoint Responses', () => {
+describe('Test Product Endpoint Responses', () => {
   const admin: User = {
     username: 'admin',
     password: 'admin',
@@ -30,7 +31,7 @@ describe('Test User Endpoint Responses', () => {
     token = response.body;
   });
 
-  fit('POST Create a new product to be added to the database', async () => {
+  it('Create a new product to be added to the database', async () => {
     const response = await server.post('/products/newproduct').set('Authorization', `Bearer ${token}`).send(product);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
@@ -42,7 +43,7 @@ describe('Test User Endpoint Responses', () => {
     });
   });
 
-  fit('GET product by id', async () => {
+  it('Get product by id', async () => {
     const response = await server.get('/products/1').send('1');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
@@ -54,7 +55,7 @@ describe('Test User Endpoint Responses', () => {
     });
   });
 
-  fit('GET all products ', async () => {
+  it('Get all products ', async () => {
     const response = await server.get('/products');
     expect(response.status).toBe(200);
     expect(response.body).toEqual([
@@ -67,4 +68,6 @@ describe('Test User Endpoint Responses', () => {
       },
     ]);
   });
+
+  // afterAll'delete all products from the database and reset it');
 });

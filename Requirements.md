@@ -3,12 +3,13 @@ The company stakeholders want to create an online storefront to showcase their g
 
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
+## Need to add role based access to some of the routes for example create, show index users only admin and create a product only admin 
+
 ## API Endpoints
 #### Products
 - Index Done
 - Show Done
-- Create [token required] Done - unique names and quantity of record needs sorting
-- [OPTIONAL] Top 5 most popular products - TODO - Dashboard query 
+- Create [token required] - Done 
 - [OPTIONAL] Products by category (args: product category) - Done
 
 #### Users
@@ -17,8 +18,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create user N[token required] Done
 - Sign in/Sign up - Done
 #### Orders
-- add product to active order - Done - TODO check status needs testing - Saturday 
-<!-- - Update order status - Nice to have  -->
+- add product to active order - Done 
 - Current Order by user (args: user id)[token required] - Done
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] - Done 
 

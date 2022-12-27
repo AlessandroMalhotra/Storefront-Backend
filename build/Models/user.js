@@ -66,7 +66,6 @@ class UserAccounts {
         }
         catch (error) {
             throw new userFacingError_1.BadRequestError(`Cannot sign in with username or password due to following error: ${error}`);
-            ;
         }
     }
 }

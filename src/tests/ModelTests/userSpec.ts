@@ -6,51 +6,50 @@ const user = new UserAccounts();
 
 describe('Test user model functions', () => {
   const newUser: User = {
-    id: 2,
-    firstName: 'sandro',
-    lastName: 'malhotra',
+    firstName: 'test',
+    lastName: 'test',
     password: 'password',
-    username: 'sandro25',
+    username: 'test',
     admin: false,
   };
 
-  fit('Checks user index function correctly been defined', () => {
+  it('Checks user index function correctly been defined', () => {
     expect(user.index).toBeDefined();
   });
 
-  fit('Checks user create function correctly been defined', () => {
+  it('Checks user create function correctly been defined', () => {
     expect(user.create).toBeDefined();
   });
 
-  fit('Checks user show function correctly been defined', () => {
+  it('Checks user show function correctly been defined', () => {
     expect(user.show).toBeDefined();
   });
 
-  fit('Create a user successfully ', async () => {
+  it('Create a user successfully ', async () => {
     const users = await user.create(newUser);
     expect(users).toEqual({
       id: 3,
-      firstName: 'sandro',
-      lastName: 'malhotra',
+      firstName: 'test',
+      lastName: 'test',
       password: users.password,
-      username: 'sandro25',
+      username: 'test',
       admin: false,
     });
   });
 
-  // it('Should return a list of users', async () => {
-  //   const users = await user.index();
-  //   expect(users).toEqual([users]);
-  // });
+  it('Should return a list of users', async () => {
+    const users = await user.index();
+    expect(users).toEqual(users);
+  });
 
-  fit('Should return user by id', async () => {
-    const users = await user.show(2);
+  it('Should return user by id', async () => {
+    const users = await user.show(3);
     expect(users).toEqual({
-      id: 2,
-      firstName: 'Alessandro',
-      lastName: 'Malhotra',
+      id: 3,
+      firstName: 'test',
+      lastName: 'test',
       password: users.password,
-      username: 'sandro25',
+      username: 'test',
       admin: false,
     });
   });

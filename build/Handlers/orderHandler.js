@@ -19,15 +19,15 @@ const create = async (req, res) => {
 };
 exports.create = create;
 const addProduct = async (req, res) => {
-    const order_product = {
+    const orderProduct = {
         quantity: Number(req.body.quantity),
-        orderId: Number(req.params.order_id),
+        orderId: Number(req.body.order_id),
         productId: Number(req.body.product_id),
     };
     try {
-        const addedProduct = await orders.addProduct(order_product);
+        const addedProduct = await orders.addProduct(orderProduct);
         if (addedProduct === undefined) {
-            throw new userFacingError_1.NotFoundError(`Unable to add ${order_product.productId} to order ${order_product.orderId} as orderId or productId doesn't exist`);
+            throw new userFacingError_1.NotFoundError(`Unable to add ${orderProduct.productId} to order ${orderProduct.orderId} as orderId or productId doesn't exist`);
         }
         res.send(addedProduct);
     }

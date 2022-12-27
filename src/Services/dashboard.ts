@@ -11,12 +11,12 @@ type orderStatus = {
 };
 
 class Dashboard {
-  async userOrder(user_id: Number): Promise<orderStatus> {
+  async userOrder(user_id: Number, status: string): Promise<orderStatus> {
     try {
       const connection = await client.connect();
       const sql =
-        'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE status = "active" AND user_id = ($1)';
-      const result = await connection.query(sql, [user_id]);
+        'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE status = ($1) AND user_id = ($2)';
+      const result = await connection.query(sql, [status, user_id]);
       const activeOrder = result.rows[0];
 
       connection.release();
@@ -26,18 +26,18 @@ class Dashboard {
     }
   }
 
-  async category(category: string): Promise <Product[]> {
+  async category(category: string): Promise<Product[]> {
     try {
-        const connection = await client.connect();
-        const sql = 'SELECT * FROM product WHERE category = ($1)';
-        const result = await connection.query(sql, [category]);
+      const connection = await client.connect();
+      const sql = 'SELECT * FROM product WHERE category = ($1)';
+      const result = await connection.query(sql, [category]);
 
-        connection.release()
-        return result.rows;
+      connection.release();
+      return result.rows;
     } catch (error) {
-        throw new BadRequestError(`Cannot get the product due to the following error: ${error}`);
+      throw new BadRequestError(`Cannot get the product due to the following error: ${error}`);
     }
   }
-};
+}
 
-export { Dashboard, orderStatus }
+export { Dashboard, orderStatus };
