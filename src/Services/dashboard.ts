@@ -30,7 +30,7 @@ class Dashboard {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM product WHERE category = ($1)';
-      const result = await connection.query(sql, [category]);
+      const result = await connection.query(sql, [category.toLowerCase]);
 
       connection.release();
       return result.rows;

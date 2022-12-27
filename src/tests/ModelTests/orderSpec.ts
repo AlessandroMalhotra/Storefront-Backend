@@ -9,7 +9,6 @@ describe('Test order model functions', () => {
     user_id: 1,
   };
 
-
   it('Checks order create function correctly been defined', () => {
     expect(order.create).toBeDefined();
   });
@@ -21,7 +20,7 @@ describe('Test order model functions', () => {
   it('Create a new order for a given user.', async () => {
     const response = await order.create(newOrder);
     expect(response).toEqual({
-      id: 1,
+      id: 2,
       status: 'active',
       user_id: 1,
     });
@@ -29,6 +28,6 @@ describe('Test order model functions', () => {
 
   it('Add a product to an order which relates to a user', async () => {
     const response = await order.addProduct({ quantity: 1, orderId: 1, productId: 1 });
-    expect(response).toEqual(response)
+    expect(response).toEqual(response);
   });
 });

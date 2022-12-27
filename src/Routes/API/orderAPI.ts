@@ -12,6 +12,6 @@ orders.post('/addproduct', verifyAuthToken, verifyStatus, addProduct);
 
 orders.get('orderstatus/:id/:status', verifyAuthToken, currentOrder);
 
-orders.get('orderstatus/:id/:status', verifyAuthToken, completedOrder);
+// orders.get('orderstatus/:id/:status', verifyAuthToken, completedOrder);
 
 export default orders;

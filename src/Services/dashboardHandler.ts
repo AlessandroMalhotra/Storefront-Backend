@@ -46,7 +46,7 @@ const categoryProduct = async (req: express.Request, res: express.Response): Pro
   try {
     const products = await dashboard.category(category);
     if (products === undefined) {
-      throw new NotFoundError(`No active orders for user ${category}`);
+      throw new NotFoundError(`No products with category name: ${category}`);
     }
     res.send(products);
   } catch (error) {

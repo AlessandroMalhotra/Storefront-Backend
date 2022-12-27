@@ -39,7 +39,6 @@ const show = async (req: express.Request, res: express.Response): Promise<void> 
   }
 };
 
-
 const create = async (req: express.Request, res: express.Response): Promise<void> => {
   const newProduct: Product = {
     name: req.body.name,

@@ -12,7 +12,7 @@ describe('Test Product Endpoint Responses', () => {
         password: 'admin',
     };
     const product = {
-        id: 1,
+        id: 2,
         name: 'Nike Air Force 1',
         price: 135,
         category: 'Trainers',
@@ -30,7 +30,7 @@ describe('Test Product Endpoint Responses', () => {
         const response = await server.post('/products/newproduct').set('Authorization', `Bearer ${token}`).send(product);
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-            id: 1,
+            id: 2,
             name: 'Nike Air Force 1',
             price: 135,
             category: 'Trainers',
@@ -38,10 +38,10 @@ describe('Test Product Endpoint Responses', () => {
         });
     });
     it('Get product by id', async () => {
-        const response = await server.get('/products/1').send('1');
+        const response = await server.get('/products/2').send('2');
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-            id: 1,
+            id: 2,
             name: 'Nike Air Force 1',
             price: 135,
             category: 'Trainers',
@@ -54,6 +54,13 @@ describe('Test Product Endpoint Responses', () => {
         expect(response.body).toEqual([
             {
                 id: 1,
+                name: 'FOG Essentials Jumper',
+                price: 85,
+                category: 'Sweatshirt',
+                quantity: 2
+            },
+            {
+                id: 2,
                 name: 'Nike Air Force 1',
                 price: 135,
                 category: 'Trainers',

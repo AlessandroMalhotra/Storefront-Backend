@@ -47,14 +47,14 @@ describe('Test User Endpoint Responses', () => {
       },
     ]);
   });
-  
+
   it('Create a user with the given credentials and admin token passed', async () => {
     const response = await server.post('/users/createuser').set('Authorization', `Bearer ${token}`).send(user);
 
     expect(response.status).toBe(200);
     expect(response.body.token);
   });
-  
+
   it('Show a user by id and correct token passed', async () => {
     const response = await server.get('/users/2').set('Authorization', `Bearer ${token}`).send('2');
 

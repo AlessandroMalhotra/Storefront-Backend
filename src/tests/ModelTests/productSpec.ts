@@ -1,16 +1,8 @@
-import { BadRequestError, NotFoundError } from '../../ErrorClasses/UserFacingErrors/userFacingError';
-import { Product, ProductStore } from '../../Models/product';
+import { ProductStore } from '../../Models/product';
 
 const product = new ProductStore();
 
 describe('Test product model functions', () => {
-  const newProduct: Product = {
-    id: 1,
-    name: 'Nike Air Force 1',
-    price: 135,
-    category: 'Trainers',
-    quantity: 1,
-  };
   it('Checks product index method correctly defined', async () => {
     expect(product.index).toBeDefined();
   });
@@ -28,18 +20,25 @@ describe('Test product model functions', () => {
     expect(newP).toEqual([
       {
         id: 1,
+        name: 'FOG Essentials Jumper',
+        price: 85,
+        category: 'Sweatshirt',
+        quantity: 2,
+      },
+      {
+        id: 2,
         name: 'Nike Air Force 1',
         price: 135,
         category: 'Trainers',
-        quantity: 1
-      }
-    ])
+        quantity: 1,
+      },
+    ]);
   });
 
   it('Should return product by id', async () => {
-    const newP = await product.show(1);
+    const newP = await product.show(2);
     expect(newP).toEqual({
-      id: 1,
+      id: 2,
       name: 'Nike Air Force 1',
       price: 135,
       category: 'Trainers',
@@ -55,7 +54,7 @@ describe('Test product model functions', () => {
       quantity: 2,
     });
     expect(newP).toEqual({
-      id: 2,
+      id: 3,
       name: 'Nike Dunk Low Disrupt',
       price: 115,
       category: 'Trainers',

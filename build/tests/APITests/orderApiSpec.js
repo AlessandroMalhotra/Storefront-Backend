@@ -23,7 +23,7 @@ describe('Test Order endpoint methods', () => {
         expect(response.body.token);
         token = response.body;
     });
-    xit('Create an order for a given user_id', async () => {
+    it('Create an active order for a given user_id', async () => {
         const response = await server.post('/orders/neworder').set('Authorization', `Bearer ${token}`).send(newOrder);
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
@@ -32,7 +32,7 @@ describe('Test Order endpoint methods', () => {
             user_id: 1,
         });
     });
-    xit('Add a product to an order', async () => {
+    it('Add a product to an order', async () => {
         const response = await server.post('/orders/1/product').set('Authorization', `Bearer ${token}`).send({
             quantity: 1,
             product_id: 1,

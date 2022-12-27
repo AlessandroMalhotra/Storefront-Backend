@@ -1,16 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const userFacingError_1 = require("../../ErrorClasses/UserFacingErrors/userFacingError");
 const product_1 = require("../../Models/product");
 const product = new product_1.ProductStore();
 describe('Test product model functions', () => {
-    const newProduct = {
-        id: 1,
-        name: 'Nike Air Force 1',
-        price: 135,
-        category: 'Trainers',
-        quantity: 1,
-    };
     it('Checks product index method correctly defined', async () => {
         expect(product.index).toBeDefined();
     });
@@ -25,6 +17,13 @@ describe('Test product model functions', () => {
         expect(newP).toEqual([
             {
                 id: 1,
+                name: 'FOG Essentials Jumper',
+                price: 85,
+                category: 'Sweatshirt',
+                quantity: 2
+            },
+            {
+                id: 2,
                 name: 'Nike Air Force 1',
                 price: 135,
                 category: 'Trainers',
@@ -33,19 +32,14 @@ describe('Test product model functions', () => {
         ]);
     });
     it('Should return product by id', async () => {
-        const newP = await product.show(1);
+        const newP = await product.show(2);
         expect(newP).toEqual({
-            id: 1,
+            id: 2,
             name: 'Nike Air Force 1',
             price: 135,
             category: 'Trainers',
             quantity: 1,
         });
-    });
-    fit('Should throw error when id given does not exist', async () => {
-        expect(async () => {
-            await product.show(10);
-        }).toThrowError(userFacingError_1.NotFoundError);
     });
     it('Insert a product entry successfully ', async () => {
         const newP = await product.create({
@@ -55,7 +49,7 @@ describe('Test product model functions', () => {
             quantity: 2,
         });
         expect(newP).toEqual({
-            id: 2,
+            id: 3,
             name: 'Nike Dunk Low Disrupt',
             price: 115,
             category: 'Trainers',

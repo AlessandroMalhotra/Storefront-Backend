@@ -12,5 +12,5 @@ const orders = express_1.default.Router();
 orders.post('/neworder', verifyToken_1.default, orderHandler_1.create);
 orders.post('/addproduct', verifyToken_1.default, verifyOrderStatus_1.default, orderHandler_1.addProduct);
 orders.get('orderstatus/:id/:status', verifyToken_1.default, dashboardHandler_1.currentOrder);
-orders.get('orderstatus/:id/:status', verifyToken_1.default, dashboardHandler_1.completedOrder);
+// orders.get('orderstatus/:id/:status', verifyAuthToken, completedOrder);
 exports.default = orders;

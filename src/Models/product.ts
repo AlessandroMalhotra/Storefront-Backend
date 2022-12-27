@@ -43,17 +43,18 @@ class ProductStore {
 
   async productExists(name: string): Promise<Boolean> {
     try {
-      let productName = name.replace(/\s/g, '').toLowerCase();
+      const productName = name.replace(/\s/g, '').toLowerCase();
       const connection = await client.connect();
       const sql = 'SELECT name FROM product';
       const result = await connection.query(sql);
-      
-      let names = result.rows;
+
+      let names = result.rows[0];
       names = Object.values(names);
-  
+
       for (let product of names) {
         product = product.replace(/\s/g, '').toLowerCase();
-  
+        console.log(product);
+
         if (product == productName) {
           throw new BadRequestError(`Product with name ${name} already exists.`);
         }
@@ -63,15 +64,9 @@ class ProductStore {
     } catch (error) {
       throw new BadRequestError(`Product with name ${name} already exists.`);
     }
-  };
-  
-  async create(p: Product): Promise<Product | unknown> {
-    /* 
-     Convert name to lower case and remove all the whitespaces.
-     You can then compare it to other products see if it is there before adding and increase the quantity.
-     Do this as middelware 
-     */
+  }
 
+  async create(p: Product): Promise<Product | unknown> {
     try {
       const connection = await client.connect();
       const sql = 'INSERT INTO product (name, price, category, quantity) VALUES ($1, $2, $3, $4) RETURNING *';

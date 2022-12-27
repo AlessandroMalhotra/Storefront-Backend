@@ -1,0 +1,1 @@
+INSERT INTO product(name, price, category, quantity) VALUES('FOG Essentials Jumper', 85, 'Sweatshirt', 2);
