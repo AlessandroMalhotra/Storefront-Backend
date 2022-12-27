@@ -34,7 +34,7 @@ class ProductStore {
     }
     async productExists(name) {
         try {
-            let productName = name.replace(/\s/g, '').toLowerCase();
+            const productName = name.replace(/\s/g, '').toLowerCase();
             const connection = await database_1.default.connect();
             const sql = 'SELECT name FROM product';
             const result = await connection.query(sql);
@@ -54,7 +54,6 @@ class ProductStore {
             throw new userFacingError_1.BadRequestError(`Product with name ${name} already exists.`);
         }
     }
-    ;
     async create(p) {
         try {
             const connection = await database_1.default.connect();

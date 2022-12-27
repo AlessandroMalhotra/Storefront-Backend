@@ -11,5 +11,5 @@ const products = express_1.default.Router();
 products.get('/', productHandler_1.index);
 products.get('/:id', productHandler_1.show);
 products.post('/newproduct', verifyToken_1.default, productHandler_1.create);
-products.get('/productcategory', dashboardHandler_1.categoryProduct);
+products.get('/productcategory/:category', dashboardHandler_1.categoryProduct);
 exports.default = products;

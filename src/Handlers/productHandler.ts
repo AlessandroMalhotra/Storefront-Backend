@@ -43,7 +43,7 @@ const create = async (req: express.Request, res: express.Response): Promise<void
   const newProduct: Product = {
     name: req.body.name,
     price: req.body.price,
-    category: req.body.category,
+    category: req.body.category.toLowerCase(),
     quantity: req.body.quantity,
   };
 

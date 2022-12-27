@@ -46,7 +46,7 @@ const create = async (req, res) => {
     const newProduct = {
         name: req.body.name,
         price: req.body.price,
-        category: req.body.category,
+        category: req.body.category.toLowerCase(),
         quantity: req.body.quantity,
     };
     try {

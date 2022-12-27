@@ -1,3 +1,4 @@
+import { lowerCase } from 'lodash';
 import client from '../Database/database';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import { Product } from '../Models/product';
@@ -30,10 +31,10 @@ class Dashboard {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM product WHERE category = ($1)';
-      const result = await connection.query(sql, [category.toLowerCase]);
+      const result = await connection.query(sql, [category.toLowerCase()]);
 
       connection.release();
-      return result.rows;
+      return result.rows[0];
     } catch (error) {
       throw new BadRequestError(`Cannot get the product due to the following error: ${error}`);
     }

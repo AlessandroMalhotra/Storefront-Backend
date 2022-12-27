@@ -45,11 +45,11 @@ const completedOrder = async (req, res) => {
 };
 exports.completedOrder = completedOrder;
 const categoryProduct = async (req, res) => {
-    const category = req.params.category;
+    let category = req.params.category;
     try {
         const products = await dashboard.category(category);
         if (products === undefined) {
-            throw new userFacingError_1.NotFoundError(`No active orders for user ${category}`);
+            throw new userFacingError_1.NotFoundError(`No products with category name: ${category}`);
         }
         res.send(products);
     }

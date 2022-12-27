@@ -24,9 +24,9 @@ class Dashboard {
         try {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM product WHERE category = ($1)';
-            const result = await connection.query(sql, [category]);
+            const result = await connection.query(sql, [category.toLowerCase()]);
             connection.release();
-            return result.rows;
+            return result.rows[0];
         }
         catch (error) {
             throw new userFacingError_1.BadRequestError(`Cannot get the product due to the following error: ${error}`);

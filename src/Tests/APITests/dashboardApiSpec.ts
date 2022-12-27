@@ -5,7 +5,7 @@ import supertest from 'supertest';
 
 const server = supertest(app);
 
-describe('Test Product Endpoint Responses', () => {
+describe('Test Dashboard Endpoint Responses', () => {
   const admin: User = {
     username: 'admin',
     password: 'admin',
@@ -24,14 +24,14 @@ describe('Test Product Endpoint Responses', () => {
   it('Get products by category', async () => {
     const response = await server.get('/products/productcategory/sweatshirt').set('Authorization', `Bearer ${token}`).send('sweatshirt');
     expect(response.status).toBe(200);
-    expect(response.body).toBe([
+    expect(response.body).toEqual(
       {
         id: 1,
         name: 'FOG Essentials Jumper',
         price: 85,
-        category: 'Sweatshirt',
+        category: 'sweatshirt',
         quantity: 2,
       },
-    ]);
+    );
   });
 });

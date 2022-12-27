@@ -22,14 +22,14 @@ describe('Test product model functions', () => {
         id: 1,
         name: 'FOG Essentials Jumper',
         price: 85,
-        category: 'Sweatshirt',
+        category: 'sweatshirt',
         quantity: 2,
       },
       {
         id: 2,
         name: 'Nike Air Force 1',
         price: 135,
-        category: 'Trainers',
+        category: 'trainers',
         quantity: 1,
       },
     ]);
@@ -41,7 +41,7 @@ describe('Test product model functions', () => {
       id: 2,
       name: 'Nike Air Force 1',
       price: 135,
-      category: 'Trainers',
+      category: 'trainers',
       quantity: 1,
     });
   });
@@ -50,14 +50,14 @@ describe('Test product model functions', () => {
     const newP = await product.create({
       name: 'Nike Dunk Low Disrupt',
       price: 115,
-      category: 'Trainers',
+      category: 'trainers',
       quantity: 2,
     });
     expect(newP).toEqual({
       id: 3,
       name: 'Nike Dunk Low Disrupt',
       price: 115,
-      category: 'Trainers',
+      category: 'trainers',
       quantity: 2,
     });
   });

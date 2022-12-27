@@ -11,6 +11,6 @@ products.get('/:id', show);
 
 products.post('/newproduct', verifyAuthToken, create);
 
-products.get('/productcategory', categoryProduct);
+products.get('/productcategory/:category', categoryProduct);
 
 export default products;

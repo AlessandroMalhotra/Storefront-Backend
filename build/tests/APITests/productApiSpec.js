@@ -33,7 +33,7 @@ describe('Test Product Endpoint Responses', () => {
             id: 2,
             name: 'Nike Air Force 1',
             price: 135,
-            category: 'Trainers',
+            category: 'trainers',
             quantity: 1,
         });
     });
@@ -44,7 +44,7 @@ describe('Test Product Endpoint Responses', () => {
             id: 2,
             name: 'Nike Air Force 1',
             price: 135,
-            category: 'Trainers',
+            category: 'trainers',
             quantity: 1,
         });
     });
@@ -56,17 +56,16 @@ describe('Test Product Endpoint Responses', () => {
                 id: 1,
                 name: 'FOG Essentials Jumper',
                 price: 85,
-                category: 'Sweatshirt',
-                quantity: 2
+                category: 'sweatshirt',
+                quantity: 2,
             },
             {
                 id: 2,
                 name: 'Nike Air Force 1',
                 price: 135,
-                category: 'Trainers',
+                category: 'trainers',
                 quantity: 1,
             },
         ]);
     });
-    // afterAll'delete all products from the database and reset it');
 });

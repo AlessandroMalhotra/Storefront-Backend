@@ -41,7 +41,7 @@ const completedOrder = async (req: express.Request, res: express.Response): Prom
 };
 
 const categoryProduct = async (req: express.Request, res: express.Response): Promise<void> => {
-  const category = req.params.category;
+  let category = req.params.category;
 
   try {
     const products = await dashboard.category(category);
