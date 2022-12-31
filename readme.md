@@ -56,6 +56,7 @@ Tables are prepopulated with the following;
 - Testing using npm run test
 ```
 ## Endpoints
+```
 - Host and Port - http://127.0.0.1:3000/
 #### users
 - /users [GET] -> index() [Token required]
@@ -72,3 +73,4 @@ Tables are prepopulated with the following;
 #### dahsboars queries
 - /products/productcategory/:category[GET] -> productsbycategury() [Token required]
 - /orders//orderstatus/:id/:status[GET] -> activeorderforuser() [Token required]
+```
