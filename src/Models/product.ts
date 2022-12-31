@@ -1,7 +1,5 @@
-import { Connection } from 'pg';
 import client from '../Database/database';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
-import products from '../Routes/API/productAPI';
 
 type Product = {
   id?: number;
@@ -41,7 +39,7 @@ class ProductStore {
     }
   }
 
-  async productExists(name: string): Promise<Boolean> {
+  async productExists(name: string): Promise<boolean> {
     try {
       const productName = name.replace(/\s/g, '').toLowerCase();
       const connection = await client.connect();

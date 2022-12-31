@@ -1,9 +1,7 @@
-import express from 'express';
 import { app } from '../../server';
 import supertest from 'supertest';
 import { Order } from '../../Models/orders';
 import { User } from '../../Models/user';
-import { Product } from '../../Models/product';
 
 const server = supertest(app);
 
@@ -32,15 +30,16 @@ describe('Test Order endpoint methods', () => {
     const response = await server.post('/orders/neworder').set('Authorization', `Bearer ${token}`).send(newOrder);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      id: 1,
+      id: 2,
       status: 'active',
       user_id: 1,
     });
   });
 
   it('Add a product to an order', async () => {
-    const response = await server.post('/orders/1/product').set('Authorization', `Bearer ${token}`).send({
+    const response = await server.post('/orders/addproduct').set('Authorization', `Bearer ${token}`).send({
       quantity: 1,
+      order_id: 1,
       product_id: 1,
     });
     expect(response.status).toBe(200);

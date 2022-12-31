@@ -2,14 +2,14 @@ import express, { NextFunction } from 'express';
 import client from '../../Database/database';
 import { BadRequestError } from '../../ErrorClasses/UserFacingErrors/userFacingError';
 
-const orderStatus = async (order_id: Number): Promise<string> => {
+const orderStatus = async (order_id: number): Promise<string> => {
   try {
     const connection = await client.connect();
     const sql = 'SELECT status FROM orders WHERE id = ($1)';
     const result = await connection.query(sql, [order_id]);
 
-    //console.log(result);
     let status = result.rows[0];
+    console.log(status);
     status = String(Object.values(status));
 
     connection.release();

@@ -10,8 +10,8 @@ const orderStatus = async (order_id) => {
         const connection = await database_1.default.connect();
         const sql = 'SELECT status FROM orders WHERE id = ($1)';
         const result = await connection.query(sql, [order_id]);
-        //console.log(result);
         let status = result.rows[0];
+        console.log(status);
         status = String(Object.values(status));
         connection.release();
         return status;

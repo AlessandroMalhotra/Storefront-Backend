@@ -1,4 +1,3 @@
-import { before } from 'lodash';
 import { Order, Orders } from '../../Models/orders';
 
 const order = new Orders();
@@ -20,7 +19,7 @@ describe('Test order model functions', () => {
   it('Create a new order for a given user.', async () => {
     const response = await order.create(newOrder);
     expect(response).toEqual({
-      id: 2,
+      id: 3,
       status: 'active',
       user_id: 1,
     });

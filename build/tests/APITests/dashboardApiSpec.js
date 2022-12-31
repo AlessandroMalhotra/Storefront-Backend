@@ -30,4 +30,10 @@ describe('Test Dashboard Endpoint Responses', () => {
             quantity: 2,
         });
     });
+    it('Current order for a user', async () => {
+        const response = await server.get('/orders/orderstatus/1/active').set('Authorization', `Bearer ${token}`).send('1');
+        expect(response.status).toBe(200);
+        console.log(response);
+        //expect(response.body).toEqual();
+    });
 });

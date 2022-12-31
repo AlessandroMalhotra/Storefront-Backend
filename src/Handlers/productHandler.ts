@@ -1,4 +1,4 @@
-import express, { NextFunction } from 'express';
+import express from 'express';
 import { ProductStore, Product } from '../Models/product';
 import { NotFoundError, BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 

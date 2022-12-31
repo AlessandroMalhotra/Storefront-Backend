@@ -1,4 +1,3 @@
-import express from 'express';
 import { app } from '../../server';
 import { User } from '../../Models/user';
 import supertest from 'supertest';

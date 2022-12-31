@@ -1,4 +1,3 @@
-import { lowerCase } from 'lodash';
 import client from '../Database/database';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 import { Product } from '../Models/product';
@@ -12,13 +11,14 @@ type orderStatus = {
 };
 
 class Dashboard {
-  async userOrder(user_id: Number, status: string): Promise<orderStatus> {
+  async userOrder(user_id: number, status: string): Promise<orderStatus[]> {
     try {
       const connection = await client.connect();
       const sql =
-        'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE status = ($1) AND user_id = ($2)';
-      const result = await connection.query(sql, [status, user_id]);
-      const activeOrder = result.rows[0];
+        'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE user_id = ($1) ';
+      const result = await connection.query(sql, [user_id]);
+      console.log(result);
+      const activeOrder = result.rows;
 
       connection.release();
       return activeOrder;

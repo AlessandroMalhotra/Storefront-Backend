@@ -1,0 +1,1 @@
+INSERT INTO orders(status, user_id) VALUES ('active', 1);

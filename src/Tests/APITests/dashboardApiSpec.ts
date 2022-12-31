@@ -1,5 +1,4 @@
 import { app } from '../../server';
-import { Product } from '../../Models/product';
 import { User } from '../../Models/user';
 import supertest from 'supertest';
 
@@ -24,14 +23,19 @@ describe('Test Dashboard Endpoint Responses', () => {
   it('Get products by category', async () => {
     const response = await server.get('/products/productcategory/sweatshirt').set('Authorization', `Bearer ${token}`).send('sweatshirt');
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(
-      {
-        id: 1,
-        name: 'FOG Essentials Jumper',
-        price: 85,
-        category: 'sweatshirt',
-        quantity: 2,
-      },
-    );
+    expect(response.body).toEqual({
+      id: 1,
+      name: 'FOG Essentials Jumper',
+      price: 85,
+      category: 'sweatshirt',
+      quantity: 2,
+    });
+  });
+
+  it('Current order for a user', async () => {
+    const response = await server.get('/orders/orderstatus/1/active').set('Authorization', `Bearer ${token}`).send('1');
+    expect(response.status).toBe(200);
+    console.log(response);
+    //expect(response.body).toEqual();
   });
 });

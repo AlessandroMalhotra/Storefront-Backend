@@ -1,5 +1,3 @@
-import { before } from 'node:test';
-import { userInfo } from 'os';
 import { User, UserAccounts } from '../../Models/user';
 
 const user = new UserAccounts();

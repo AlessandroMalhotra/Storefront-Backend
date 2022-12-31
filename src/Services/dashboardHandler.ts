@@ -1,16 +1,17 @@
 import express from 'express';
 import { BadRequestError, NotFoundError } from '../ErrorClasses/UserFacingErrors/userFacingError';
-import { Dashboard, orderStatus } from './dashboard';
+import { Dashboard } from './dashboard';
 
 const dashboard = new Dashboard();
 
 const currentOrder = async (req: express.Request, res: express.Response): Promise<void> => {
-  const usersID = Number(req.params.user_id);
+  const userID = Number(req.params.id);
   const status = req.params.status;
+  console.log(status);
   try {
-    const activeOrders = await dashboard.userOrder(usersID, status);
+    const activeOrders = await dashboard.userOrder(userID, status);
     if (activeOrders === undefined) {
-      throw new NotFoundError(`No active orders for user ${usersID}`);
+      throw new NotFoundError(`No active orders for user ${userID}`);
     }
     res.send(activeOrders);
   } catch (error) {
@@ -22,26 +23,26 @@ const currentOrder = async (req: express.Request, res: express.Response): Promis
   }
 };
 
-const completedOrder = async (req: express.Request, res: express.Response): Promise<void> => {
-  const usersID = Number(req.params.user_id);
-  const status = req.params.status;
-  try {
-    const activeOrders = await dashboard.userOrder(usersID, status);
-    if (activeOrders === undefined) {
-      throw new NotFoundError(`No completed orders for user ${usersID}`);
-    }
-    res.send(activeOrders);
-  } catch (error) {
-    if (error instanceof BadRequestError) {
-      res.status(400).send(error);
-    } else {
-      res.status(404).send(error);
-    }
-  }
-};
+// const completedOrder = async (req: express.Request, res: express.Response): Promise<void> => {
+//   const usersID = Number(req.params.user_id);
+//   const status = req.params.status;
+//   try {
+//     const activeOrders = await dashboard.userOrder(usersID, status);
+//     if (activeOrders === undefined) {
+//       throw new NotFoundError(`No completed orders for user ${usersID}`);
+//     }
+//     res.send(activeOrders);
+//   } catch (error) {
+//     if (error instanceof BadRequestError) {
+//       res.status(400).send(error);
+//     } else {
+//       res.status(404).send(error);
+//     }
+//   }
+// };
 
 const categoryProduct = async (req: express.Request, res: express.Response): Promise<void> => {
-  let category = req.params.category;
+  const category = req.params.category;
 
   try {
     const products = await dashboard.category(category);
@@ -58,4 +59,4 @@ const categoryProduct = async (req: express.Request, res: express.Response): Pro
   }
 };
 
-export { currentOrder, completedOrder, categoryProduct };
+export { currentOrder, categoryProduct };

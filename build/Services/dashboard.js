@@ -10,9 +10,10 @@ class Dashboard {
     async userOrder(user_id, status) {
         try {
             const connection = await database_1.default.connect();
-            const sql = 'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE status = ($1) AND user_id = ($2)';
-            const result = await connection.query(sql, [status, user_id]);
-            const activeOrder = result.rows[0];
+            const sql = 'SELECT user_id, status, order_id, product_id FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE user_id = ($1) ';
+            const result = await connection.query(sql, [user_id]);
+            console.log(result);
+            const activeOrder = result.rows;
             connection.release();
             return activeOrder;
         }
