@@ -53,6 +53,7 @@ Tables are prepopulated with the following;
 ```
 - Run npm ; npm run start
 - navigate to http://127.0.0.1:3000/
+- Then navigate to http://127.0.0.1:3000/users/signin - Use username: admin, password: admin to get a JWT.
 - Testing using npm run test
 ```
 ## Endpoints
