@@ -51,13 +51,14 @@ Tables are prepopulated with the following;
 ```
 ## Database Scheme 
 ```
-Users Table     Product Table    Orders      Order_Products             
-- id            - id             - id        - id
-- firstName     - name           - status    - quantity
-- lastName      - price          - user_id   - order_id
-- password      - category                   - product_id
-- username      - quantity
-- admin
+Users Table            Product Table          Orders                 Order_Products             
+Column       Types     Column       Types     Column      Types      Column         Types
+- id         integer   - id         integer   - id        integer    - id           integer
+- firstName  char      - name       char      - status    char       - quantity     integer
+- lastName   char      - price      integer   - user_id   bigint     - order_id     bigint
+- password   text      - category   char                             - product_id   bigint
+- username   char      - quantity   integer
+- admin      boolean
 ```
 ## Starting the App
 ```
