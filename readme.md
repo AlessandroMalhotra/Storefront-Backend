@@ -49,6 +49,16 @@ Tables are prepopulated with the following;
 - 1 product - For tests
 - 1 order - For tests
 ```
+## Database Scheme 
+```
+Users Table     Product Table    Orders      Order_Products             
+- id            - id             - id.       - id
+- firstName     - name           - status    - quantity
+- lastName      - price.         - user_id   - order_id
+- password      - category                   - product_id
+- username      - quantity
+- admin
+
 ## Starting the App
 ```
 - Run npm ; npm run start
