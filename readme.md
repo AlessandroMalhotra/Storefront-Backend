@@ -58,7 +58,7 @@ Users Table     Product Table    Orders      Order_Products
 - password      - category                   - product_id
 - username      - quantity
 - admin
-
+```
 ## Starting the App
 ```
 - Run npm ; npm run start
