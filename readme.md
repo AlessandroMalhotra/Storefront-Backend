@@ -52,9 +52,9 @@ Tables are prepopulated with the following;
 ## Database Scheme 
 ```
 Users Table     Product Table    Orders      Order_Products             
-- id            - id             - id.       - id
+- id            - id             - id        - id
 - firstName     - name           - status    - quantity
-- lastName      - price.         - user_id   - order_id
+- lastName      - price          - user_id   - order_id
 - password      - category                   - product_id
 - username      - quantity
 - admin
