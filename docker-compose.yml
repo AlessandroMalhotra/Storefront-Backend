@@ -1,7 +1,5 @@
 services:
   backend:
     build: ./backend
-    ports:
-      - "8000:3000"
-  # db:
-  #   image: 
+    ports: 
+      - 3000:3000
