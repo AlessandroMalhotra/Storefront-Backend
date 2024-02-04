@@ -1,4 +1,4 @@
-import client from '../Database/database';
+import client from '../../Database/database';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';
 
 type Order = {

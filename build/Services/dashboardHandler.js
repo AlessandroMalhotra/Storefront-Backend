@@ -43,7 +43,7 @@ exports.currentOrder = currentOrder;
 //   }
 // };
 const categoryProduct = async (req, res) => {
-    let category = req.params.category;
+    const category = req.params.category;
     try {
         const products = await dashboard.category(category);
         if (products === undefined) {

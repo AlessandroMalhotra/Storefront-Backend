@@ -1,4 +1,4 @@
-import client from '../Database/database';
+import client from '../../Database/database';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { BadRequestError } from '../ErrorClasses/UserFacingErrors/userFacingError';

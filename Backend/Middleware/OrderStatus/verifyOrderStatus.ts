@@ -1,5 +1,5 @@
 import express, { NextFunction } from 'express';
-import client from '../../Database/database';
+import client from '../../../Database/database';
 import { BadRequestError } from '../../ErrorClasses/UserFacingErrors/userFacingError';
 
 const orderStatus = async (order_id: number): Promise<string> => {

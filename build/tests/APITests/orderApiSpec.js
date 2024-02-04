@@ -36,7 +36,7 @@ describe('Test Order endpoint methods', () => {
         const response = await server.post('/orders/addproduct').set('Authorization', `Bearer ${token}`).send({
             quantity: 1,
             order_id: 1,
-            product_id: 1
+            product_id: 1,
         });
         expect(response.status).toBe(200);
     });
