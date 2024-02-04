@@ -5,6 +5,8 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
+RUN npm run build
+
 ENV POSTGRES_HOST=localhost
 ENV POSTGRES_DB=storefront
 ENV POSTGRES_DB_TEST=store_front_test
