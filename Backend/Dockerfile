@@ -1,5 +1,5 @@
 FROM node:18-alpine
-WORKDIR ./backend
+WORKDIR /backend
 
 COPY . .
 
