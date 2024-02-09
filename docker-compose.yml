@@ -1,5 +1,13 @@
-services:
+services: 
   backend:
-    build: ./backend
+    container_name: backend
+    build:
+      context: ./Backend
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_DB=storefront
+      - POSTGRES_DB_TEST=store_front_test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports: 
-      - 3000:3000
+      - "3000:3000"
